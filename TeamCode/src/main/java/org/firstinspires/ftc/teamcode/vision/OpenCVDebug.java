@@ -80,9 +80,9 @@ public class OpenCVDebug extends LinearOpMode {
         static final Scalar black = new Scalar(0, 0, 0);
         static final Scalar white = new Scalar(255, 255, 255);
 
-        public static Point anchor1 = new Point(50, 90);
+        public static Point anchor1 = new Point(40, 90);
         public static Point anchor2 = new Point(150, 75);
-        public static Point anchor3 = new Point(250, 88);
+        public static Point anchor3 = new Point(260, 88);
 
         public static Scalar avgs = new Scalar(0, 0, 0);
 
@@ -118,7 +118,7 @@ public class OpenCVDebug extends LinearOpMode {
 
         int avg1, avg2, avg3;
 
-        public volatile Position position = Position.CENTER;
+        public volatile Position position = Position.RIGHT;
 
         void inputToCr(Mat input) {
             Imgproc.cvtColor(input, YCrCb, Imgproc.COLOR_RGB2YCrCb);

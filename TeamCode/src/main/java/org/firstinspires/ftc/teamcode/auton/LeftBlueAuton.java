@@ -183,8 +183,10 @@ public class LeftBlueAuton extends LinearOpMode {
 
 
         TrajectorySequence parkCenter = drive.trajectorySequenceBuilder(yellowpixelcenterL)
-                .addTemporalMarker(0.2, ()->{
-                    Constants.setLift(Constants.liftTargetMid,1);
+                .addTemporalMarker(0.4, ()->{
+                    tiltL.setPosition(Constants.tiltIntakePositionL);
+                    tiltR.setPosition(Constants.tiltIntakePositionR);
+                    Constants.setLift(0, 1);
                 })
                 .lineToLinearHeading(parkL)
                 .build();
@@ -232,14 +234,16 @@ public class LeftBlueAuton extends LinearOpMode {
                 sleep(500);
                 blocker.setPosition(Constants.blockerOpenPosition);
                 sleep(500);
+                Constants.setLift(Constants.liftTargetAuton - 400, 1);
                 drive.followTrajectorySequence(parkLeft);
             }
             else if (position == OpenCVDebug.CenterStagePipeline.Position.CENTER) {
                 drive.followTrajectorySequence(purpleCenter);
                 drive.followTrajectorySequence(yellowCenter);
                 blocker.setPosition(Constants.blockerOpenPosition);
+                sleep(500);
+                Constants.setLift(Constants.liftTargetAuton - 400, 1);
                 drive.followTrajectorySequence(parkCenter);
-                runCycles(drive);
             }
             else {
                 drive.followTrajectorySequence(purpleRight);
@@ -249,6 +253,7 @@ public class LeftBlueAuton extends LinearOpMode {
                 sleep(500);
                 blocker.setPosition(Constants.blockerOpenPosition);
                 sleep(500);
+                Constants.setLift(Constants.liftTargetAuton - 400, 1);
                 drive.followTrajectorySequence(parkRight);
             }
             sleep(2000);

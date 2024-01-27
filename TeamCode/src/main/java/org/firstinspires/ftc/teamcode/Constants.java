@@ -89,7 +89,7 @@ public class Constants {
     public static Pose2d startPoseRR = new Pose2d(-60, -1, Math.toRadians(0));
     public static Pose2d purplepixelcenterRR = new Pose2d(-30, -1, Math.toRadians(0));
     public static Pose2d purplepixelrightRR = new Pose2d(-40, -8, Math.toRadians(0));
-    public static Pose2d purplepixelleftRR = new Pose2d(-37,3,Math.toRadians(90));
+    public static Pose2d purplepixelleftRR = new Pose2d(-40,3,Math.toRadians(90));
 
 
     public static Pose2d purplepixelcenterRRoffset = new Pose2d(-38, -6, Math.toRadians(90));
@@ -101,7 +101,7 @@ public class Constants {
     public static Pose2d yellowpixelrightRR = new Pose2d(-49,-40.5,Math.toRadians(90));
     public static Pose2d yellowpixelleftRR = new Pose2d(-37,-40.5,Math.toRadians(90));
     public static Pose2d parkR = new Pose2d(-36, -33, Math.toRadians(90));
-    public static Pose2d parkL = new Pose2d(36, -28, Math.toRadians(90));
+    public static Pose2d parkL = new Pose2d(36, -30, Math.toRadians(90));
 
 
 
@@ -128,9 +128,9 @@ public class Constants {
 
     public static Pose2d yellowpixelrightRL = new Pose2d(-28,-32,Math.toRadians(90));
 
-    public static Pose2d whitepixelRed = new Pose2d(-13, -10, Math.toRadians(90));
+    public static Pose2d whitepixelRed = new Pose2d(-20, -10, Math.toRadians(90));
 
-    public static Pose2d whitepixeloffsetRed = new Pose2d(-13, 75.5, Math.toRadians(90));
+    public static Pose2d whitepixeloffsetRed = new Pose2d(-20, 75.5, Math.toRadians(90));
 
 
 

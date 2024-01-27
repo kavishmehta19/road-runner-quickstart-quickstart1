@@ -96,18 +96,9 @@ public class RightBlueAuton extends LinearOpMode {
                 .lineToLinearHeading(purplepixelcenterL)
                 .addDisplacementMarker(()->{
                     dropdown.setPosition(Constants.dropdownautonpositionstart);
-                    sleep(500);
-                    Constants.setIntake(0.6);
                     blocker.setPosition(Constants.blockerOpenPosition);
                 })
                 .lineToLinearHeading(purplepixelcenterLoffset)
-
-                .addDisplacementMarker(()->{
-                    sleep(2000);
-                    blocker.setPosition(Constants.blockerClosedPosition);
-                    Constants.setIntake(0);
-
-                })
 
                 .lineToLinearHeading(Constants.whitepixeloffsetBlue)
                 .build();
