@@ -82,7 +82,7 @@ public class OpenCVDebug extends LinearOpMode {
 
         public static Point anchor1 = new Point(40, 90);
         public static Point anchor2 = new Point(150, 75);
-        public static Point anchor3 = new Point(260, 88);
+        public static Point anchor3 = new Point(270, 88);
 
         public static Scalar avgs = new Scalar(0, 0, 0);
 
