@@ -59,7 +59,7 @@ public class LeftBlueAuton2 extends LinearOpMode {
 
     CRServo roller;
 
-    int numcycles = 3;
+    int numcycles = 2;
 
     Pose2d startPose = Constants.startPoseBL;
     Pose2d purplepixelcenterL = Constants.purplepixelcenterBL;
@@ -190,19 +190,15 @@ public class LeftBlueAuton2 extends LinearOpMode {
                 .build();
 
         TrajectorySequence parkLeft = drive.trajectorySequenceBuilder(Constants.yellowpixelleftBL)
-                .addTemporalMarker(0.4, ()->{
-                    tiltL.setPosition(Constants.tiltIntakePositionL);
-                    tiltR.setPosition(Constants.tiltIntakePositionR);
-                    Constants.setLift(0, 1);
+                .addTemporalMarker(0.2, ()->{
+                    Constants.setLift(Constants.liftTargetMid,1);
                 })
                 .lineToLinearHeading(parkL)
                 .build();
 
         TrajectorySequence parkRight = drive.trajectorySequenceBuilder(Constants.yellowpixelrightBL)
-                .addTemporalMarker(0.4, ()->{
-                    tiltL.setPosition(Constants.tiltIntakePositionL);
-                    tiltR.setPosition(Constants.tiltIntakePositionR);
-                    Constants.setLift(0, 1);
+                .addTemporalMarker(0.2, ()->{
+                    Constants.setLift(Constants.liftTargetMid,1);
                 })
                 .lineToLinearHeading(parkL)
                 .build();
@@ -233,6 +229,7 @@ public class LeftBlueAuton2 extends LinearOpMode {
                 blocker.setPosition(Constants.blockerOpenPosition);
                 sleep(500);
                 drive.followTrajectorySequence(parkLeft);
+                runCycles(drive);
             }
             else if (position == OpenCVDebug.CenterStagePipeline.Position.CENTER) {
                 drive.followTrajectorySequence(purpleCenter);
@@ -250,6 +247,7 @@ public class LeftBlueAuton2 extends LinearOpMode {
                 blocker.setPosition(Constants.blockerOpenPosition);
                 sleep(500);
                 drive.followTrajectorySequence(parkRight);
+                runCycles(drive);
             }
             sleep(2000);
 

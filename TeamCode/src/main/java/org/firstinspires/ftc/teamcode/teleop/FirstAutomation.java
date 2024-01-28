@@ -62,11 +62,11 @@ public class FirstAutomation extends LinearOpMode {
         drive = new SampleMecanumDrive(hardwareMap);
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        double tiltIntakePositionL = 0.72;
-        double tiltIntakePositionR = 0.26;
+        double tiltIntakePositionL = 0.8;
+        double tiltIntakePositionR = 0.18;
 
-        double tiltDropPositionL = 0.3;
-        double tiltDropPositionR = 0.65;
+        double tiltDropPositionL = 0.2;
+        double tiltDropPositionR = 0.75;
 
         double blockerOpenPosition = 0.5;
         double blockerClosedPosition = 1;

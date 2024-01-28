@@ -47,7 +47,7 @@ public class RightRedAuton2 extends LinearOpMode {
     Pose2d startPose = Constants.startPoseRR;
     Pose2d parkR = Constants.parkR;
 
-    int numcycles = 3;
+    int numcycles = 2;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -166,7 +166,7 @@ public class RightRedAuton2 extends LinearOpMode {
 
         TrajectorySequence parkCenter = drive.trajectorySequenceBuilder(Constants.yellowpixelcenterRR)
                 .addTemporalMarker(0.2, ()->{
-                    Constants.setLift(Constants.liftTargetMid, 1);//change to lifttargetmid for 2+2
+                    Constants.setLift(Constants.liftTargetMid, 1);
                 })
                 .lineToLinearHeading(parkR)
                 .build();
@@ -250,7 +250,7 @@ public class RightRedAuton2 extends LinearOpMode {
                     .lineToLinearHeading(Constants.whitepixeloffsetRed)
                     .addTemporalMarker(0.1,()->{
                         dropdown.setPosition(Constants.dropdownautonpositionstart + (currentCycleCounter * 0.03));
-                        Constants.setIntake(0.6);
+                        Constants.setIntake(0.7);
                         tiltL.setPosition(Constants.tiltIntakePositionL);
                         tiltR.setPosition(Constants.tiltIntakePositionR);
                         Constants.setLift(0, 1);

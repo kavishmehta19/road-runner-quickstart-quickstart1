@@ -11,13 +11,12 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
-@TeleOp(name="Second Automation")
+@TeleOp(name="Second Automation1")
 public class SecondAutomation extends LinearOpMode {
 
     SampleMecanumDrive drive;
     DcMotor liftL = null;
     DcMotor liftR = null;
-
     DcMotor intakeR = null;
 
     DcMotor intakeL = null;
@@ -62,11 +61,11 @@ public class SecondAutomation extends LinearOpMode {
         drive = new SampleMecanumDrive(hardwareMap);
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        double tiltIntakePositionL = 0.72;
-        double tiltIntakePositionR = 0.26;
+        double tiltIntakePositionL = 0.92;
+        double tiltIntakePositionR = 0.06;
 
-        double tiltDropPositionL = 0.3;
-        double tiltDropPositionR = 0.65;
+        double tiltDropPositionL = 0.2;
+        double tiltDropPositionR = 0.76;
 
         double blockerOpenPosition = 0.5;
         double blockerClosedPosition = 1;
@@ -77,9 +76,6 @@ public class SecondAutomation extends LinearOpMode {
         double dropdownPosition = Constants.dropdownPositionUp;
         dropdown.setPosition(Constants.dropdownPositionUp);
 
-        double tiltRPosition = tiltIntakePositionR;
-        double tiltLPosition = tiltIntakePositionL;
-
         long timer = System.currentTimeMillis();
         boolean timerRunning = false;
 
@@ -89,8 +85,8 @@ public class SecondAutomation extends LinearOpMode {
         boolean depositing = false;
 
         boolean tiltDropping = false;
-        tiltL.setPosition(tiltIntakePositionL);
-        tiltR.setPosition(tiltIntakePositionR);
+        tiltL.setPosition(Constants.tiltIntakePositionL);
+        tiltR.setPosition(Constants.tiltIntakePositionR);
         airplane.setPosition(airplaneClosedPosition);
 
         boolean lastRightBumper = false;
@@ -146,11 +142,11 @@ public class SecondAutomation extends LinearOpMode {
             boolean leftBumper = g2.left_bumper;
             if (leftBumper && !lastLeftBumper) {
                 if (tiltDropping) {
-                    tiltL.setPosition(tiltIntakePositionL);
-                    tiltR.setPosition(tiltIntakePositionR);
+                    tiltL.setPosition(Constants.tiltIntakePositionL);
+                    tiltR.setPosition(Constants.tiltIntakePositionR);
                 } else {
-                    tiltL.setPosition(tiltDropPositionL);
-                    tiltR.setPosition(tiltDropPositionR);
+                    tiltL.setPosition(Constants.tiltDropPositionL);
+                    tiltR.setPosition(Constants.tiltDropPositionR);
                 }
                 tiltDropping = !tiltDropping;
             }
