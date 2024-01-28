@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Constants {
 
 
-    public static DcMotor liftL;
+    public static DcMotor liftL;//urmom1234
     public static DcMotor liftR;
 
     public static DcMotor intakeR;
