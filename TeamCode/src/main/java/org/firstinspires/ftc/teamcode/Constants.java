@@ -24,7 +24,7 @@ public class Constants {
     public static Servo airplane;
     public static Servo dropdown;
 
-    public static double tiltIntakePositionL = 0.96;
+    public static double tiltIntakePositionL = 0.97;
     public static double tiltIntakePositionR = 0.54;
 
     public static double tiltDropPositionL = 0.63;
