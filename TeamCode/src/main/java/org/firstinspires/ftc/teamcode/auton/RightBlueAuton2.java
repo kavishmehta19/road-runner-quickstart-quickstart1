@@ -26,9 +26,9 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class RightBlueAuton2 extends LinearOpMode {
 
-    SampleMecanumDrive drive;
+    SampleMecanumDrive drive;//drivetrain
 
-    DcMotor liftL;
+    DcMotor liftL;//lift motors
     DcMotor liftR;
 
     Servo blocker;
@@ -38,13 +38,13 @@ public class RightBlueAuton2 extends LinearOpMode {
     Servo airplane;
     Servo dropdown;
 
-    OpenCvCamera phoneCam;
+    OpenCvCamera phoneCam;//camera
     WebcamName webcamName;
-    OpenCVDebug.CenterStagePipeline pipeline;
+    OpenCVDebug.CenterStagePipeline pipeline;//opencv pipeline
 
     CRServo roller;
 
-    Pose2d startPose = Constants.startPoseBR;
+    Pose2d startPose = Constants.startPoseBR;//positions
     Pose2d purplepixelcenterL = Constants.purplepixelcenterBR;
 
     Pose2d purplepixelleftL = Constants.purplepixelleftBR;
@@ -73,7 +73,7 @@ public class RightBlueAuton2 extends LinearOpMode {
         blocker.setPosition(Constants.blockerClosedPosition);
         dropdown.setPosition(Constants.dropdownPositionUp);
 
-        webcamName = hardwareMap.get(WebcamName.class, "webcam");
+        webcamName = hardwareMap.get(WebcamName.class, "webcam");//opencv
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         phoneCam = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId);
 
@@ -92,24 +92,13 @@ public class RightBlueAuton2 extends LinearOpMode {
 
         drive = new SampleMecanumDrive(hardwareMap);
 
-        TrajectorySequence purpleCenter = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence purpleCenter = drive.trajectorySequenceBuilder(startPose)//trajectory sequence
                 .lineToLinearHeading(purplepixelcenterL)
                 .addDisplacementMarker(()->{
                     dropdown.setPosition(Constants.dropdownautonpositionstart);
                     sleep(500);
-                    Constants.setIntake(0.6);
-                    blocker.setPosition(Constants.blockerOpenPosition);
                 })
                 .lineToLinearHeading(purplepixelcenterLoffset)
-
-                .addDisplacementMarker(()->{
-                    sleep(2000);
-                    blocker.setPosition(Constants.blockerClosedPosition);
-                    Constants.setIntake(0);
-
-                })
-
-                .lineToLinearHeading(Constants.whitepixeloffsetBlue)
                 .build();
 
         TrajectorySequence purpleLeft = drive.trajectorySequenceBuilder(startPose)
@@ -126,15 +115,16 @@ public class RightBlueAuton2 extends LinearOpMode {
                 .lineToLinearHeading(Constants.purplepixelrightBL)
                 .build();
 
-        TrajectorySequence yellowCenter = drive.trajectorySequenceBuilder(Constants.whitepixeloffsetBlue)
-                .addTemporalMarker(0.1, ()->{
+        TrajectorySequence yellowCenter = drive.trajectorySequenceBuilder(purplepixelcenterLoffset)
+                .addTemporalMarker(2.3, ()->{
                     blocker.setPosition(Constants.blockerClosedPosition);
-                    Constants.setLift(Constants.liftTargetAuton -  300, 1);
+                    Constants.setLift(Constants.liftTargetAuton, 1);
                 })
-                .addTemporalMarker(0.3, ()->{
+                .addTemporalMarker(2.6, ()->{
                     tiltL.setPosition(Constants.tiltDropPositionL);
                     tiltR.setPosition(Constants.tiltDropPositionR);
                 })
+                .lineToLinearHeading(Constants.whitepixelBlue)
                 .lineToLinearHeading(yellowpixelcenterL)
                 .build();
 
@@ -163,6 +153,10 @@ public class RightBlueAuton2 extends LinearOpMode {
 
 
         TrajectorySequence parkCenter = drive.trajectorySequenceBuilder(yellowpixelcenterL)
+                .addTemporalMarker(0.1, ()->{
+                    Constants.setLift(Constants.liftTargetMid, 1);
+                })
+
                 .addTemporalMarker(0.4, ()->{
                     tiltL.setPosition(Constants.tiltIntakePositionL);
                     tiltR.setPosition(Constants.tiltIntakePositionR);

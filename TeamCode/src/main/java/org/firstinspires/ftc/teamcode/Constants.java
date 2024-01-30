@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Constants {
 
 
-    public static DcMotor liftL;//urmom1234
+    public static DcMotor liftL;
     public static DcMotor liftR;
 
     public static DcMotor intakeR;
@@ -24,11 +24,11 @@ public class Constants {
     public static Servo airplane;
     public static Servo dropdown;
 
-    public static double tiltIntakePositionL = 0.97;
-    public static double tiltIntakePositionR = 0.54;
+    public static double tiltIntakePositionL = 0.96;//intake tilt position servo Left
+    public static double tiltIntakePositionR = 0.54;//intake tilt position servo Right
 
-    public static double tiltDropPositionL = 0.63;
-    public static double tiltDropPositionR = 0.87;
+    public static double tiltDropPositionL = 0.63;//drop tilt position servo Left
+    public static double tiltDropPositionR = 0.87;//drop tilt position servo Right
 
     public static double blockerOpenPosition = 0.5;
     public static double blockerClosedPosition = 1;
@@ -71,13 +71,13 @@ public class Constants {
     public static Pose2d purplepixelrightBR = new Pose2d(37,2,Math.toRadians(130));
 
     public static Pose2d purplepixelcenterBRoffset2 = new Pose2d(12, -6, Math.toRadians(90));
-    public static Pose2d purplepixelcenterBRoffset = new Pose2d(12, 74.5, Math.toRadians(90));
+    public static Pose2d purplepixelcenterBRoffset = new Pose2d(12, 55, Math.toRadians(90));
 
     public static Pose2d purplepixelleftBRoffset = new Pose2d(purplepixelleftBL.getX(),-24,Math.toRadians(180));
 
     public static Pose2d purplepixelrightBRoffset = new Pose2d(40,-6,Math.toRadians(180));
 
-    public static Pose2d yellowpixelcenterBR = new Pose2d(42, -34, Math.toRadians(90));
+    public static Pose2d yellowpixelcenterBR = new Pose2d(47, -37, Math.toRadians(90));
 
     public static Pose2d yellowpixelleftBR = new Pose2d(41.5,-32,Math.toRadians(90));
 
