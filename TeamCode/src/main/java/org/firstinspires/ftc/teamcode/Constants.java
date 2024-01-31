@@ -1,28 +1,28 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode; //Importing Libraries
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.acmerobotics.roadrunner.geometry.Pose2d; //Importing Libraries
+import com.qualcomm.robotcore.hardware.CRServo; //Importing Libraries
+import com.qualcomm.robotcore.hardware.DcMotor; //Importing Libraries
+import com.qualcomm.robotcore.hardware.HardwareMap; //Importing Libraries
+import com.qualcomm.robotcore.hardware.Servo; //Importing Libraries
 
-public class Constants {
+public class Constants { //Declaring Class
 
 
-    public static DcMotor liftL;
-    public static DcMotor liftR;
+    public static DcMotor liftL; // Right Lift
+    public static DcMotor liftR; // Left Lift
 
-    public static DcMotor intakeR;
+    public static DcMotor intakeR; //Intake Right
 
-    public static DcMotor intakeL;
+    public static DcMotor intakeL; //Intake Left
 
     public static Servo blocker;
-    public static Servo tiltL;
-    public static Servo tiltR;
-    public static CRServo roller;
+    public static Servo tiltL; // Outtake Left Side
+    public static Servo tiltR; // Outtake Right Side
+    public static CRServo roller; //Continuously Rotating Roller
 
     public static Servo airplane;
-    public static Servo dropdown;
+    public static Servo dropdown; // Dropdown intake
 
     public static double tiltIntakePositionL = 0.96;//intake tilt position servo Left
     public static double tiltIntakePositionR = 0.54;//intake tilt position servo Right
@@ -39,15 +39,15 @@ public class Constants {
     public static double dropdownPositionUp = 0;
     public static double dropdownPositionDown = 0.533;
 
-    public static double dropdownautonpositionstart = 0.385;
+    public static double dropdownautonpositionstart = 0.385; // Dropdown at start of autonomous
 
     //BLUE LEFT
-    public static Pose2d startPoseBL = new Pose2d(60, -6, Math.toRadians(180));
+    public static Pose2d startPoseBL = new Pose2d(60, -6, Math.toRadians(180)); // Line to Linear Heading - Goes to position (60,-6) while turning 180 degrees
     public static Pose2d purplepixelcenterBL = new Pose2d(33, -6, Math.toRadians(180));
     public static Pose2d purplepixelleftBL = new Pose2d(40, -18, Math.toRadians(180));
     public static Pose2d purplepixelrightBL = new Pose2d(37,3,Math.toRadians(130));
     public static Pose2d purplepixelcenterBLoffset = new Pose2d(36, -6, Math.toRadians(90));
-    public static Pose2d purplepixelleftBLoffset = new Pose2d(purplepixelleftBL.getX(),-24,Math.toRadians(180));
+    public static Pose2d purplepixelleftBLoffset = new Pose2d(purplepixelleftBL.getX(),-24,Math.toRadians(180)); // Retrieves the x-coordinate of purplepixelleftBL with y-coordinate of -24, turns 180 degrees
     public static Pose2d purplepixelrightBLoffset = new Pose2d(40,-6,Math.toRadians(180));
     public static Pose2d yellowpixelcenterBL = new Pose2d(35, -34.5, Math.toRadians(90));
     public static Pose2d yellowpixelleftBL = new Pose2d(41,-32.5,Math.toRadians(90));
@@ -64,7 +64,7 @@ public class Constants {
     // BLUE RIGHT
     public static Pose2d startPoseBR = new Pose2d(60, 43, Math.toRadians(180));
 
-    public static Pose2d purplepixelcenterBR = new Pose2d(26, 55, Math.toRadians(0));
+    public static Pose2d purplepixelcenterBR = new Pose2d(26, 55, Math.toRadians(0)); //Strafes to (26, 55)
 
     public static Pose2d purplepixelleftBR = new Pose2d(12, 54, Math.toRadians(90));
 
@@ -134,39 +134,39 @@ public class Constants {
 
 
 
-    public static int liftTargetAuton = -1500;
+    public static int liftTargetAuton = -1500; //Setting position of linear slides - decrease the variable to increase the height
     public static int liftTargetLow = -1600;
     public static int liftTargetMid  = -2000;
     public static int liftTargetHigh = -2500;
 
-    public static void setLift(int value, double power) {
+    public static void setLift(int value, double power) { //Linear Slides
         // sets both lift motors to the value at the default power
-        if (value > liftR.getCurrentPosition())
+        if (value > liftR.getCurrentPosition()) //If the value is greater than the current position of the LiftR Motor, it multiplies the power by -1
             power *= -1;
 
-        liftL.setTargetPosition(value);
-        liftL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        liftL.setPower(power);
+        liftL.setTargetPosition(value); //Sets LiftL target position to value
+        liftL.setMode(DcMotor.RunMode.RUN_TO_POSITION); //Motor will keep running until it reaches Target Position
+        liftL.setPower(power); //Sets the power to the power variable
 
-
+        //MIRROR IMAGE OF LiftL
         liftR.setTargetPosition(-value);
         liftR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         liftR.setPower(-power);
     }
 
-    public static void setIntake(double power){
+    public static void setIntake(double power){ //Intake
         intakeL.setPower(power);
         intakeR.setPower(-power);
-        roller.setPower(power);
+        roller.setPower(power); //Sets roller to the power variable
     }
 
 
 
-    public static void initHardware(HardwareMap hardwareMap){
-        liftL = hardwareMap.dcMotor.get("liftL");
-        liftL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        liftL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        liftL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    public static void initHardware(HardwareMap hardwareMap){ //Hardware map provides a way to access and configure hardware devices
+        liftL = hardwareMap.dcMotor.get("liftL"); //Initializes LiftL Motor by getting it from the HardwareMap
+        liftL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); //Brakes the motor for LiftL
+        liftL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //Stops and resets the encoder's power to 0; encoders measure the motor's position
+        liftL.setMode(DcMotor.RunMode.RUN_USING_ENCODER); // uses feedback from encoder to control and maintain a specific speed
 
         liftR = hardwareMap.dcMotor.get("liftR");
         liftR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

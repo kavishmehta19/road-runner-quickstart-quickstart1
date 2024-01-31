@@ -34,7 +34,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class LeftBlueAuton2 extends LinearOpMode {
 
-    SampleMecanumDrive drive;
+    //DECLARING VARIABLES
+    SampleMecanumDrive drive; //Driving Code
 
     DcMotor liftL;
     DcMotor liftR;

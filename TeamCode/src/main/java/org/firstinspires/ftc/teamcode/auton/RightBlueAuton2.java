@@ -28,6 +28,7 @@ public class RightBlueAuton2 extends LinearOpMode {
 
     SampleMecanumDrive drive;//drivetrain
 
+    //DECLARES VARIABLES
     DcMotor liftL;//lift motors
     DcMotor liftR;
 
@@ -45,12 +46,12 @@ public class RightBlueAuton2 extends LinearOpMode {
     CRServo roller;
 
     Pose2d startPose = Constants.startPoseBR;//positions
-    Pose2d purplepixelcenterL = Constants.purplepixelcenterBR;
+    Pose2d purplepixelcenterL = Constants.purplepixelcenterBR; //Retrieves position from the purplepixelcenterBR in the constants class
 
     Pose2d purplepixelleftL = Constants.purplepixelleftBR;
     Pose2d purplepixelcenterLoffset = Constants.purplepixelcenterBRoffset;
     Pose2d yellowpixelcenterL = Constants.yellowpixelcenterBR;
-    Pose2d parkL = Constants.parkL;
+    Pose2d parkL = Constants.parkL; //Retrieves parking from the constants class
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -58,8 +59,9 @@ public class RightBlueAuton2 extends LinearOpMode {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
 
-        Constants.initHardware(hardwareMap);
+        Constants.initHardware(hardwareMap); //Initializes Hardware Map
 
+        //RETRIEVES VARIABLES FROM THE CONSTANTS CLASS
         liftL = Constants.liftL;
         liftR = Constants.liftR;
 
@@ -77,34 +79,35 @@ public class RightBlueAuton2 extends LinearOpMode {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         phoneCam = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId);
 
-        pipeline = new OpenCVDebug.CenterStagePipeline();
+        pipeline = new OpenCVDebug.CenterStagePipeline(); //Sets pipeline for the camera to the CenterStage Pipeline
         phoneCam.setPipeline(pipeline);
 
         phoneCam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+                phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT); //Starts streaming with a specified image size and rotation
             }
 
             @Override
             public void onError(int errorCode) { }
         });
 
-        drive = new SampleMecanumDrive(hardwareMap);
+        drive = new SampleMecanumDrive(hardwareMap); //Controls the robot's mecanum drive using the hardware map
 
+        //PURPLE CENTER, LEFT, AND RIGHT TRAJECTORY SEQUENCES
         TrajectorySequence purpleCenter = drive.trajectorySequenceBuilder(startPose)//trajectory sequence
-                .lineToLinearHeading(purplepixelcenterL)
-                .addDisplacementMarker(()->{
-                    dropdown.setPosition(Constants.dropdownautonpositionstart);
-                    sleep(500);
+                .lineToLinearHeading(purplepixelcenterL) //Goes to purplepixelcenterL in a straight line trajectory
+                .addDisplacementMarker(()->{ //Adds displacement marker - executes code when trajectory reaches a certain point
+                    dropdown.setPosition(Constants.dropdownautonpositionstart); //Sets dropdown position to the constants class position
+                    sleep(500); //sleeps for 0.5 seconds
                 })
                 .lineToLinearHeading(purplepixelcenterLoffset)
-                .build();
+                .build(); //Builds trajectory sequence
 
         TrajectorySequence purpleLeft = drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(purplepixelleftL)
                 .addDisplacementMarker(()->{
-                    dropdown.setPosition(Constants.dropdownPositionUp);
+                    dropdown.setPosition(Constants.dropdownPositionUp); //Dropdown position is up
                     sleep(300);
                 })
                 .lineToLinearHeading(Constants.purplepixelleftBLoffset)
@@ -115,12 +118,13 @@ public class RightBlueAuton2 extends LinearOpMode {
                 .lineToLinearHeading(Constants.purplepixelrightBL)
                 .build();
 
+        //YELLOW CENTER, LEFT, AND RIGHT TRAJECTORY SEQUENCES
         TrajectorySequence yellowCenter = drive.trajectorySequenceBuilder(purplepixelcenterLoffset)
-                .addTemporalMarker(2.3, ()->{
+                .addTemporalMarker(2.3, ()->{ //executes below lines of code at 2.3 seconds
                     blocker.setPosition(Constants.blockerClosedPosition);
                     Constants.setLift(Constants.liftTargetAuton, 1);
                 })
-                .addTemporalMarker(2.6, ()->{
+                .addTemporalMarker(2.6, ()->{ //executes below lines of code at 2.6 seconds
                     tiltL.setPosition(Constants.tiltDropPositionL);
                     tiltR.setPosition(Constants.tiltDropPositionR);
                 })
@@ -151,7 +155,7 @@ public class RightBlueAuton2 extends LinearOpMode {
                 .build();
 
 
-
+        //PARK CENTER, LEFT, AND RIGHT TRAJECTORY SEQUENCES
         TrajectorySequence parkCenter = drive.trajectorySequenceBuilder(yellowpixelcenterL)
                 .addTemporalMarker(0.1, ()->{
                     Constants.setLift(Constants.liftTargetMid, 1);
@@ -186,29 +190,30 @@ public class RightBlueAuton2 extends LinearOpMode {
 
 
 
-        waitForStart();
+        waitForStart(); // Waits for start button to be pressed on driver station
 
-        if (isStopRequested()) return;
+        if (isStopRequested()) return; //exits the method if stop button was pressed
 
-        while (opModeIsActive() && !isStopRequested()) {
+        while (opModeIsActive() && !isStopRequested()) { //Runs while opmode is active, and stop has not been requested
 
-            drive.setPoseEstimate(startPose);
+            drive.setPoseEstimate(startPose); //sets pose estimate to start pose
 
-            OpenCVDebug.CenterStagePipeline.Position position = pipeline.position;
-            telemetry.addData("Analysis", pipeline.getAnalysis());
-            telemetry.addData("Position", pipeline.position);
+            OpenCVDebug.CenterStagePipeline.Position position = pipeline.position; //Gets current position value from pipeline associated with camera
+            telemetry.addData("Analysis", pipeline.getAnalysis());//Adds data to telemetry log
+            telemetry.addData("Position", pipeline.position); //Adds data to telemetry log
             telemetry.update();
 
-            dropdown.setPosition(Constants.dropdownPositionDown);
+            dropdown.setPosition(Constants.dropdownPositionDown); //Sets dropdown position to down
             sleep(500);
 
+            //EXECUTES CODE FOR RESPECTIVE POSITIONS
             if (position == OpenCVDebug.CenterStagePipeline.Position.LEFT) {
-                drive.followTrajectorySequence(purpleLeft);
-                drive.followTrajectorySequence(yellowLeft);
+                drive.followTrajectorySequence(purpleLeft); //follows trajectory for purple left
+                drive.followTrajectorySequence(yellowLeft); //follows trajectory for yellow left
                 sleep(500);
-                blocker.setPosition(Constants.blockerOpenPosition);
+                blocker.setPosition(Constants.blockerOpenPosition); //opens blocker at the end
                 sleep(500);
-                drive.followTrajectorySequence(parkLeft);
+                drive.followTrajectorySequence(parkLeft); //parks
             }
             else if (position == OpenCVDebug.CenterStagePipeline.Position.CENTER) {
                 drive.followTrajectorySequence(purpleCenter);
