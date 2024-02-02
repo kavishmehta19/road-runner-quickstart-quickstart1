@@ -264,7 +264,7 @@ public class LeftBlueAuton2 extends LinearOpMode {
                     .setVelConstraint(v)
                     .setAccelConstraint(a)
                     .lineToLinearHeading(Constants.whitepixelBlue)
-                    .lineToLinearHeading(Constants.whitepixeloffsetBlue)
+                    .lineToLinearHeading(Constants.whitepixeloffsetBlueLeft)
                     .addTemporalMarker(0.1,()->{
                         dropdown.setPosition(Constants.dropdownautonpositionstart + (currentCycleCounter * 0.03));
                         Constants.setIntake(0.6);
@@ -273,7 +273,7 @@ public class LeftBlueAuton2 extends LinearOpMode {
                         Constants.setLift(0, 1);
                     })
                     .build();
-            TrajectorySequence drop = drive.trajectorySequenceBuilder(Constants.whitepixeloffsetBlue)
+            TrajectorySequence drop = drive.trajectorySequenceBuilder(Constants.whitepixeloffsetBlueLeft)
                     .addTemporalMarker(2.5, ()->{
                         Constants.setLift(Constants.liftTargetMid, 1);
                         blocker.setPosition(Constants.blockerClosedPosition);
