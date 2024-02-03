@@ -192,7 +192,7 @@ public class LeftBlueAuton extends LinearOpMode {
                 .build();
 
         TrajectorySequence parkLeft = drive.trajectorySequenceBuilder(Constants.yellowpixelleftBL)
-                .addTemporalMarker(0.4, ()->{
+                .addTemporalMarker(0.2, ()->{
                     tiltL.setPosition(Constants.tiltIntakePositionL);
                     tiltR.setPosition(Constants.tiltIntakePositionR);
                     Constants.setLift(0, 1);

@@ -24,11 +24,11 @@ public class Constants { //Declaring Class
     public static Servo airplane;
     public static Servo dropdown; // Dropdown intake
 
-    public static double tiltIntakePositionL = 0.90;//intake tilt position servo Left
-    public static double tiltIntakePositionR = 0.60;//intake tilt position servo Right
+    public static double tiltIntakePositionL = 0.86;//intake tilt position servo Left
+    public static double tiltIntakePositionR = 0.64;//intake tilt position servo Right
 
-    public static double tiltDropPositionL = 0.50;//drop tilt position servo Left
-    public static double tiltDropPositionR = 1;//drop tilt position servo Right
+    public static double tiltDropPositionL = 0.55;//drop tilt position servo Left
+    public static double tiltDropPositionR = 0.95;//drop tilt position servo Right
 
     public static double blockerOpenPosition = 0.5;
     public static double blockerClosedPosition = 1;
@@ -56,10 +56,11 @@ public class Constants { //Declaring Class
     public static Pose2d cycledepositBL = new Pose2d(36,-35,Math.toRadians(90));
 
     public static Pose2d whitepixelBlue = new Pose2d(13, -10, Math.toRadians(90));
+    public static Pose2d whitepixelBlue2 = new Pose2d(13, -50, Math.toRadians(90));
 
     public static Pose2d whitepixeloffsetBlueLeft = new Pose2d(13, 76, Math.toRadians(90));
 
-    public static Pose2d whitepixeloffsetBlueRight = new Pose2d(10.5, 72.5, Math.toRadians(90));
+    public static Pose2d whitepixeloffsetBlueRight = new Pose2d(11.5, 72.5, Math.toRadians(90));
 
 
 
@@ -129,6 +130,7 @@ public class Constants { //Declaring Class
     public static Pose2d yellowpixelrightRL = new Pose2d(-28,-32,Math.toRadians(90));
 
     public static Pose2d whitepixelRed = new Pose2d(-18, -10, Math.toRadians(90));
+    public static Pose2d whitepixelRed2 = new Pose2d(-18, -60, Math.toRadians(90));
 
     public static Pose2d whitepixeloffsetRed = new Pose2d(-20, 68.5, Math.toRadians(90));
 

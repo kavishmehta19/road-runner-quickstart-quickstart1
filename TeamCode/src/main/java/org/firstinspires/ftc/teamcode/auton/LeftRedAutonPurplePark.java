@@ -120,34 +120,16 @@ public class LeftRedAutonPurplePark extends LinearOpMode {
                 .build();
 
         TrajectorySequence yellowCenter = drive.trajectorySequenceBuilder(Constants.purplepixelRLoffset)
-                .lineToLinearHeading(Constants.whitepixelRed)
-                .lineToLinearHeading(Constants.yellowpixelcenterRL)
+                .lineToLinearHeading(Constants.whitepixelRed2)
                 .build();
 
         TrajectorySequence yellowLeft = drive.trajectorySequenceBuilder(Constants.purplepixelRLoffset)
-                .lineToLinearHeading(Constants.whitepixelBlue)
-                .lineToLinearHeading(Constants.yellowpixelleftRL)
+                .lineToLinearHeading(Constants.whitepixelRed2)
                 .build();
 
         TrajectorySequence yellowRight = drive.trajectorySequenceBuilder(Constants.purplepixelRLoffset)
-                .lineToLinearHeading(Constants.whitepixelRed)
-                .lineToLinearHeading(Constants.yellowpixelrightRL)
+                .lineToLinearHeading(Constants.whitepixelRed2)
                 .build();
-
-
-
-        TrajectorySequence parkCenter = drive.trajectorySequenceBuilder(yellowpixelcenterRL)
-                .lineToLinearHeading(Constants.parkR)
-                .build();
-
-        TrajectorySequence parkLeft = drive.trajectorySequenceBuilder(Constants.yellowpixelleftRL)
-                .lineToLinearHeading(Constants.parkR)
-                .build();
-
-        TrajectorySequence parkRight = drive.trajectorySequenceBuilder(Constants.yellowpixelrightRL)
-                .lineToLinearHeading(Constants.parkR)
-                .build();
-
 
 
 
@@ -170,22 +152,16 @@ public class LeftRedAutonPurplePark extends LinearOpMode {
             if (position == OpenCVDebug.CenterStagePipeline.Position.LEFT) {
                 drive.followTrajectorySequence(purpleLeft);
                 drive.followTrajectorySequence(yellowLeft);
-                sleep(500);
-                drive.followTrajectorySequence(parkLeft);
             }
             else if (position == OpenCVDebug.CenterStagePipeline.Position.CENTER) {
                 drive.followTrajectorySequence(purpleCenter);
                 drive.followTrajectorySequence(yellowCenter);
-                sleep(500);
-                drive.followTrajectorySequence(parkCenter);
             }
             else {
                 drive.followTrajectorySequence(purpleRight);
                 dropdown.setPosition(Constants.dropdownPositionUp);
                 sleep(300);
                 drive.followTrajectorySequence(yellowRight);
-                sleep(500);
-                drive.followTrajectorySequence(parkRight);
             }
             sleep(2000);
 
