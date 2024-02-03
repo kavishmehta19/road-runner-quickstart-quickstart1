@@ -152,7 +152,7 @@ public class LeftBlueAuton2 extends LinearOpMode {
                 .addTemporalMarker(0.1, ()->{
                     Constants.setLift(Constants.liftTargetAuton, 1);
                 })
-                .addTemporalMarker(0.3, ()->{
+                .addTemporalMarker(0.4, ()->{
                     tiltL.setPosition(Constants.tiltDropPositionL);
                     tiltR.setPosition(Constants.tiltDropPositionR);
                 })
@@ -267,11 +267,13 @@ public class LeftBlueAuton2 extends LinearOpMode {
                     .lineToLinearHeading(Constants.whitepixelBlue)
                     .lineToLinearHeading(Constants.whitepixeloffsetBlueLeft)
                     .addTemporalMarker(0.1,()->{
-                        dropdown.setPosition(Constants.dropdownautonpositionstart + (currentCycleCounter * 0.03));
-                        Constants.setIntake(0.6);
                         tiltL.setPosition(Constants.tiltIntakePositionL);
                         tiltR.setPosition(Constants.tiltIntakePositionR);
                         Constants.setLift(0, 1);
+                    })
+                    .addTemporalMarker(1.5,()->{
+                        dropdown.setPosition(Constants.dropdownautonpositionstart + (currentCycleCounter * 0.03));
+                        Constants.setIntake(1);
                     })
                     .build();
             TrajectorySequence drop = drive.trajectorySequenceBuilder(Constants.whitepixeloffsetBlueLeft)
@@ -287,10 +289,10 @@ public class LeftBlueAuton2 extends LinearOpMode {
                     .addDisplacementMarker(()->{
                         Constants.setIntake(0);
                     })
-                    .lineToLinearHeading(yellowpixelcenterL)
+                    .lineToLinearHeading(Constants.yellowpixelleftBL)
                     .build();
 
-            TrajectorySequence reset = drive.trajectorySequenceBuilder(yellowpixelcenterL)
+            TrajectorySequence reset = drive.trajectorySequenceBuilder(Constants.yellowpixelleftBL)
                     .resetConstraints()
                     .lineToLinearHeading(parkL)
                     .addTemporalMarker(0.2, ()->{

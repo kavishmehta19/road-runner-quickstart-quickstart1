@@ -26,9 +26,9 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name="Right Blue Auton")
+@Autonomous(name="Right Blue Auton Purple Park")
 
-public class RightBlueAuton extends LinearOpMode {
+public class RightBlueAutonPurplePark extends LinearOpMode {
 
     SampleMecanumDrive drive;//drivetrain
 
@@ -144,39 +144,16 @@ public class RightBlueAuton extends LinearOpMode {
 
 
         TrajectorySequence yellowCenter = drive.trajectorySequenceBuilder(purplepixelcenterLoffset)
-                .addTemporalMarker(2.3, ()->{
-                    blocker.setPosition(Constants.blockerClosedPosition);
-                    Constants.setLift(Constants.liftTargetAuton, 1);
-                })
-                .addTemporalMarker(2.6, ()->{
-                    tiltL.setPosition(Constants.tiltDropPositionL);
-                    tiltR.setPosition(Constants.tiltDropPositionR);
-                })
                 .lineToLinearHeading(Constants.whitepixelBlue)
                 .lineToLinearHeading(yellowpixelcenterL)
                 .build();
 
         TrajectorySequence yellowLeft = drive.trajectorySequenceBuilder(Constants.purplepixelBRoffset)
-                .addTemporalMarker(3.4, ()->{
-                    blocker.setPosition(Constants.blockerClosedPosition);
-                    Constants.setLift(Constants.liftTargetAuton, 1);
-                })
-                .addTemporalMarker(3.8, ()->{
-                    tiltL.setPosition(Constants.tiltDropPositionL);
-                    tiltR.setPosition(Constants.tiltDropPositionR);
-                })
                 .lineToLinearHeading(Constants.whitepixelBlue)
                 .lineToLinearHeading(Constants.yellowpixelleftBR)
                 .build();
 
         TrajectorySequence yellowRight = drive.trajectorySequenceBuilder(Constants.purplepixelBRoffset)
-                .addTemporalMarker(3.4, ()->{
-                    Constants.setLift(Constants.liftTargetLow, 1);
-                })
-                .addTemporalMarker(3.8, ()->{
-                    tiltL.setPosition(Constants.tiltDropPositionL);
-                    tiltR.setPosition(Constants.tiltDropPositionR);
-                })
                 .lineToLinearHeading(Constants.whitepixelBlue)
                 .lineToLinearHeading(Constants.yellowpixelrightBR)
                 .build();
@@ -184,39 +161,14 @@ public class RightBlueAuton extends LinearOpMode {
 
 
         TrajectorySequence parkCenter = drive.trajectorySequenceBuilder(yellowpixelcenterL)
-                .addTemporalMarker(0.1, ()->{
-                    Constants.setLift(Constants.liftTargetMid, 1);
-                })
-
-                .addTemporalMarker(0.4, ()->{
-                    tiltL.setPosition(Constants.tiltIntakePositionL);
-                    tiltR.setPosition(Constants.tiltIntakePositionR);
-                    Constants.setLift(0, 1);
-                })
                 .lineToLinearHeading(parkL)
                 .build();
 
         TrajectorySequence parkLeft = drive.trajectorySequenceBuilder(Constants.yellowpixelleftBR)
-                .addTemporalMarker(0.1, ()->{
-                    Constants.setLift(Constants.liftTargetMid, 1);
-                })
-                .addTemporalMarker(0.4, ()->{
-                    tiltL.setPosition(Constants.tiltIntakePositionL);
-                    tiltR.setPosition(Constants.tiltIntakePositionR);
-                    Constants.setLift(0, 1);
-                })
                 .lineToLinearHeading(parkL)
                 .build();
 
         TrajectorySequence parkRight = drive.trajectorySequenceBuilder(Constants.yellowpixelrightBR)
-                .addTemporalMarker(0.1, ()->{
-                    Constants.setLift(Constants.liftTargetMid, 1);
-                })
-                .addTemporalMarker(0.4, ()->{
-                    tiltL.setPosition(Constants.tiltIntakePositionL);
-                    tiltR.setPosition(Constants.tiltIntakePositionR);
-                    Constants.setLift(0, 1);
-                })
                 .lineToLinearHeading(parkL)
                 .build();
 
@@ -243,7 +195,6 @@ public class RightBlueAuton extends LinearOpMode {
                 drive.followTrajectorySequence(purpleLeft);
                 drive.followTrajectorySequence(yellowLeft);
                 sleep(500);
-                blocker.setPosition(Constants.blockerOpenPosition);
                 sleep(500);
                 drive.followTrajectorySequence(parkLeft);
 
@@ -252,7 +203,6 @@ public class RightBlueAuton extends LinearOpMode {
                 drive.followTrajectorySequence(purpleCenter);
                 drive.followTrajectorySequence(yellowCenter);
                 sleep(200);
-                blocker.setPosition(Constants.blockerOpenPosition);
                 sleep(200);
                 drive.followTrajectorySequence(parkCenter);
 
@@ -262,9 +212,6 @@ public class RightBlueAuton extends LinearOpMode {
                 dropdown.setPosition(Constants.dropdownPositionUp);
                 sleep(300);
                 drive.followTrajectorySequence(yellowRight);
-                sleep(500);
-                blocker.setPosition(Constants.blockerOpenPosition);
-                sleep(500);
                 drive.followTrajectorySequence(parkRight);
             }
             sleep(2000);

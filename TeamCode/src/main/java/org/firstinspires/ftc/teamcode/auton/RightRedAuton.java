@@ -159,6 +159,7 @@ public class RightRedAuton extends LinearOpMode {
                     tiltL.setPosition(Constants.tiltDropPositionL);
                     tiltR.setPosition(Constants.tiltDropPositionR);
                 })
+                .lineToLinearHeading(Constants.yellowpixelrightRRoffset)
                 .lineToLinearHeading(Constants.yellowpixelrightRR)
                 .build();
 
