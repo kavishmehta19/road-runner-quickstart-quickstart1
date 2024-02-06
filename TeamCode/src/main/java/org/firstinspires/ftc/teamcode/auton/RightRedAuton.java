@@ -172,6 +172,7 @@ public class RightRedAuton extends LinearOpMode {
                     Constants.setLift(0, 1);//change to lifttargetmid for 2+2
                 })
                 .lineToLinearHeading(parkR)
+                .lineToLinearHeading(Constants.parkR2)
                 .build();
 
         TrajectorySequence parkLeft = drive.trajectorySequenceBuilder(Constants.yellowpixelleftRR)
@@ -181,6 +182,7 @@ public class RightRedAuton extends LinearOpMode {
                     Constants.setLift(0, 1);
                 })
                 .lineToLinearHeading(parkR)
+                .lineToLinearHeading(Constants.parkR2)
                 .build();
 
         TrajectorySequence parkRight = drive.trajectorySequenceBuilder(Constants.yellowpixelrightRR)
@@ -190,6 +192,7 @@ public class RightRedAuton extends LinearOpMode {
                     Constants.setLift(0, 1);
                 })
                 .lineToLinearHeading(parkR)
+                .lineToLinearHeading(Constants.parkR2)
                 .build();
 
 
