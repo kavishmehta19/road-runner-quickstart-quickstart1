@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode; //Importing Libraries
 
 import com.acmerobotics.roadrunner.geometry.Pose2d; //Importing Libraries
 import com.qualcomm.robotcore.hardware.CRServo; //Importing Libraries
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor; //Importing Libraries
 import com.qualcomm.robotcore.hardware.HardwareMap; //Importing Libraries
 import com.qualcomm.robotcore.hardware.Servo; //Importing Libraries
@@ -21,6 +22,8 @@ public class Constants { //Declaring Class
     public static Servo tiltR; // Outtake Right Side
     public static CRServo roller; //Continuously Rotating Roller
 
+    public static ColorSensor colorSensor;
+
     public static Servo airplane;
     public static Servo dropdown; // Dropdown intake
 
@@ -36,10 +39,10 @@ public class Constants { //Declaring Class
     public static double airplaneOpenPosition = 1;
     public static double airplaneClosedPosition = 0;
 
-    public static double dropdownPositionUp = 0;
-    public static double dropdownPositionDown = 0.533;
+    public static double dropdownPositionUp = .495;
+    public static double dropdownPositionDown = 0;
 
-    public static double dropdownautonpositionstart = 0.385; // Dropdown at start of autonomous
+    public static double dropdownautonpositionstart = 0.115; // Dropdown at start of autonomous
 
     //BLUE LEFT
     public static Pose2d startPoseBL = new Pose2d(60, -6, Math.toRadians(180)); // Line to Linear Heading - Goes to position (60,-6) while turning 180 degrees
@@ -188,6 +191,8 @@ public class Constants { //Declaring Class
         dropdown = hardwareMap.servo.get("dropdown");
 
         roller = hardwareMap.crservo.get("roller");
+
+        colorSensor = hardwareMap.colorSensor.get("color");
     }
 
 }

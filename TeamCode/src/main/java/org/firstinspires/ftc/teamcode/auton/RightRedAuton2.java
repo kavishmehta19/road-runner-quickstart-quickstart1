@@ -9,6 +9,7 @@ import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -21,7 +22,7 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name="Right Red Auton 2+2")
+@Autonomous(name = "Right Red Auton 2+2")
 
 public class RightRedAuton2 extends LinearOpMode {
 
@@ -35,6 +36,8 @@ public class RightRedAuton2 extends LinearOpMode {
     Servo tiltR;
     Servo airplane;
     Servo dropdown;
+
+    ColorSensor colorSensor;
 
     OpenCvCamera phoneCam;
     WebcamName webcamName;
@@ -67,6 +70,8 @@ public class RightRedAuton2 extends LinearOpMode {
         airplane = Constants.airplane;
         dropdown = Constants.dropdown;
 
+        colorSensor = Constants.colorSensor;
+
         blocker.setPosition(Constants.blockerClosedPosition);
         dropdown.setPosition(Constants.dropdownPositionUp);
 
@@ -84,7 +89,8 @@ public class RightRedAuton2 extends LinearOpMode {
             }
 
             @Override
-            public void onError(int errorCode) { }
+            public void onError(int errorCode) {
+            }
         });
 
         drive = new SampleMecanumDrive(hardwareMap);
@@ -105,7 +111,7 @@ public class RightRedAuton2 extends LinearOpMode {
 
         TrajectorySequence purpleCenter = drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(Constants.purplepixelcenterRR)
-                .addDisplacementMarker(()->{
+                .addDisplacementMarker(() -> {
                     dropdown.setPosition(Constants.dropdownPositionUp);
                 })
                 .lineToLinearHeading(Constants.purplepixelcenterRRoffset)
@@ -114,7 +120,7 @@ public class RightRedAuton2 extends LinearOpMode {
         TrajectorySequence purpleLeft = drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(Constants.purplepixelleftRRoffset)
                 .lineToLinearHeading(Constants.purplepixelleftRR)
-                .addDisplacementMarker(()->{
+                .addDisplacementMarker(() -> {
                     dropdown.setPosition(Constants.dropdownPositionUp);
                     sleep(300);
                 })
@@ -122,7 +128,7 @@ public class RightRedAuton2 extends LinearOpMode {
 
         TrajectorySequence purpleRight = drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(Constants.purplepixelrightRR)
-                .addDisplacementMarker(()->{
+                .addDisplacementMarker(() -> {
                     dropdown.setPosition(Constants.dropdownPositionUp);
                     sleep(300);
                 })
@@ -130,10 +136,10 @@ public class RightRedAuton2 extends LinearOpMode {
                 .build();
 
         TrajectorySequence yellowCenter = drive.trajectorySequenceBuilder(Constants.purplepixelcenterRRoffset)
-                .addTemporalMarker(0.1, ()->{
+                .addTemporalMarker(0.1, () -> {
                     Constants.setLift(Constants.liftTargetAuton, 1);
                 })
-                .addTemporalMarker(0.3, ()->{
+                .addTemporalMarker(0.3, () -> {
                     tiltL.setPosition(Constants.tiltDropPositionL);
                     tiltR.setPosition(Constants.tiltDropPositionR);
                 })
@@ -141,10 +147,10 @@ public class RightRedAuton2 extends LinearOpMode {
                 .build();
 
         TrajectorySequence yellowLeft = drive.trajectorySequenceBuilder(Constants.purplepixelleftRRoffset)
-                .addTemporalMarker(0.1, ()->{
+                .addTemporalMarker(0.1, () -> {
                     Constants.setLift(Constants.liftTargetAuton, 1);
                 })
-                .addTemporalMarker(0.3, ()->{
+                .addTemporalMarker(0.3, () -> {
                     tiltL.setPosition(Constants.tiltDropPositionL);
                     tiltR.setPosition(Constants.tiltDropPositionR);
                 })
@@ -152,10 +158,10 @@ public class RightRedAuton2 extends LinearOpMode {
                 .build();
 
         TrajectorySequence yellowRight = drive.trajectorySequenceBuilder(Constants.purplepixelrightRR)
-                .addTemporalMarker(0.1, ()->{
+                .addTemporalMarker(0.1, () -> {
                     Constants.setLift(Constants.liftTargetAuton, 1);
                 })
-                .addTemporalMarker(0.3, ()->{
+                .addTemporalMarker(0.3, () -> {
                     tiltL.setPosition(Constants.tiltDropPositionL);
                     tiltR.setPosition(Constants.tiltDropPositionR);
                 })
@@ -163,29 +169,26 @@ public class RightRedAuton2 extends LinearOpMode {
                 .build();
 
 
-
         TrajectorySequence parkCenter = drive.trajectorySequenceBuilder(Constants.yellowpixelcenterRR)
-                .addTemporalMarker(0.2, ()->{
+                .addTemporalMarker(0.2, () -> {
                     Constants.setLift(Constants.liftTargetMid, 1);
                 })
                 .lineToLinearHeading(parkR)
                 .build();
 
         TrajectorySequence parkLeft = drive.trajectorySequenceBuilder(Constants.yellowpixelleftRR)
-                .addTemporalMarker(0.2, ()->{
+                .addTemporalMarker(0.2, () -> {
                     Constants.setLift(Constants.liftTargetMid, 1);
                 })
                 .lineToLinearHeading(parkR)
                 .build();
 
         TrajectorySequence parkRight = drive.trajectorySequenceBuilder(Constants.yellowpixelrightRR)
-                .addTemporalMarker(0.2, ()->{
+                .addTemporalMarker(0.2, () -> {
                     Constants.setLift(Constants.liftTargetMid, 1);
                 })
                 .lineToLinearHeading(parkR)
                 .build();
-
-
 
 
         waitForStart();
@@ -212,16 +215,14 @@ public class RightRedAuton2 extends LinearOpMode {
                 sleep(500);
                 drive.followTrajectorySequence(parkLeft);
                 runCycles(drive);
-            }
-            else if (position == OpenCVDebug.CenterStagePipeline.Position.CENTER) {
+            } else if (position == OpenCVDebug.CenterStagePipeline.Position.CENTER) {
                 drive.followTrajectorySequence(purpleCenter);
                 drive.followTrajectorySequence(yellowCenter);
                 blocker.setPosition(Constants.blockerOpenPosition);
                 sleep(500);
                 drive.followTrajectorySequence(parkCenter);
                 runCycles(drive);
-            }
-            else {
+            } else {
                 drive.followTrajectorySequence(purpleRight);
                 dropdown.setPosition(Constants.dropdownPositionUp);
                 sleep(300);
@@ -248,25 +249,25 @@ public class RightRedAuton2 extends LinearOpMode {
                     .setAccelConstraint(a)
                     .lineToLinearHeading(Constants.whitepixelRed)
                     .lineToLinearHeading(Constants.whitepixeloffsetRed)
-                    .addTemporalMarker(0.1,()->{
+                    .addTemporalMarker(0.1, () -> {
                         dropdown.setPosition(Constants.dropdownautonpositionstart + (currentCycleCounter * 0.03));
-                        Constants.setIntake(0.7);
+                        Constants.setIntake(1);
                         tiltL.setPosition(Constants.tiltIntakePositionL);
                         tiltR.setPosition(Constants.tiltIntakePositionR);
                         Constants.setLift(0, 1);
                     })
                     .build();
             TrajectorySequence drop = drive.trajectorySequenceBuilder(Constants.whitepixeloffsetRed)
-                    .addTemporalMarker(2.5, ()->{
+                    .addTemporalMarker(2.5, () -> {
                         Constants.setLift(Constants.liftTargetMid, 1);
                         blocker.setPosition(Constants.blockerClosedPosition);
                     })
-                    .addTemporalMarker(3.5, ()->{
+                    .addTemporalMarker(3.5, () -> {
                         tiltL.setPosition(Constants.tiltDropPositionL);
                         tiltR.setPosition(Constants.tiltDropPositionR);
                     })
                     .lineToLinearHeading(Constants.whitepixelRed)
-                    .addDisplacementMarker(()->{
+                    .addDisplacementMarker(() -> {
                         Constants.setIntake(0);
                     })
                     .lineToLinearHeading(Constants.yellowpixelcenterRR)
@@ -275,24 +276,31 @@ public class RightRedAuton2 extends LinearOpMode {
             TrajectorySequence reset = drive.trajectorySequenceBuilder(Constants.yellowpixelcenterRR)
                     .resetConstraints()
                     .lineToLinearHeading(parkR)
-                    .addTemporalMarker(0.2, ()->{
-                        Constants.setLift(Constants.liftTargetMid - 300,1);
+                    .addTemporalMarker(0.2, () -> {
+                        Constants.setLift(Constants.liftTargetMid - 300, 1);
                     })
-                    .addTemporalMarker(0.6, ()->{
+                    .addTemporalMarker(0.6, () -> {
                         tiltL.setPosition(Constants.tiltIntakePositionL);
                         tiltR.setPosition(Constants.tiltIntakePositionR);
 
                     })
-                    .addTemporalMarker(0.8, ()->{
+                    .addTemporalMarker(0.8, () -> {
                         Constants.setLift(0, 1);
                     })
                     .build();
 
             drive.followTrajectorySequence(pickup);
             cycleCounter++;
-            sleep(500);
-            dropdown.setPosition(Constants.dropdownautonpositionstart + cycleCounter * 0.03);
-            sleep(1000);
+            if (sleepCheck(500) > 0) {
+                Constants.setIntake(-1);
+                blocker.setPosition(Constants.blockerClosedPosition);
+            } else {
+                dropdown.setPosition(Constants.dropdownautonpositionstart - cycleCounter * 0.03);
+                if (sleepCheck(1000) > 0) {
+                    Constants.setIntake(-1);
+                    blocker.setPosition(Constants.blockerClosedPosition);
+                }
+            }
             drive.followTrajectorySequence(drop);
             Constants.setIntake(0);
             blocker.setPosition(Constants.blockerOpenPosition);
@@ -300,8 +308,31 @@ public class RightRedAuton2 extends LinearOpMode {
             drive.followTrajectorySequence(reset);
             cycleCounter++;
         }
+
     }
 
+    public int sleepCheck(int millis) {
+        boolean timerStarted = false;
+        long timer = System.currentTimeMillis();
+
+        long startTime = System.currentTimeMillis();
+        while (System.currentTimeMillis() - startTime < millis) {
+            if (colorSensor.green() > 150 && colorSensor.blue() > 150 && !timerStarted) {
+                timerStarted = true;
+                timer = System.currentTimeMillis();
+            } else if (colorSensor.green() > 150 && colorSensor.blue() > 150) {
+                if (System.currentTimeMillis() - timer > 500) {
+                    return 1;
+                }
+            } else {
+                timerStarted = false;
+            }
+        }
+        if (timerStarted)
+            return 1;
+        else
+            return 0;
+    }
 
 
 }

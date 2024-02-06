@@ -9,6 +9,7 @@ import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -35,6 +36,8 @@ public class RightRedAuton extends LinearOpMode {
     Servo tiltR;
     Servo airplane;
     Servo dropdown;
+
+    ColorSensor colorSensor;
 
     OpenCvCamera phoneCam;
     WebcamName webcamName;
@@ -66,6 +69,8 @@ public class RightRedAuton extends LinearOpMode {
         tiltR = Constants.tiltR;
         airplane = Constants.airplane;
         dropdown = Constants.dropdown;
+
+        colorSensor = Constants.colorSensor;
 
         blocker.setPosition(Constants.blockerClosedPosition);
         dropdown.setPosition(Constants.dropdownPositionUp);
@@ -300,9 +305,18 @@ public class RightRedAuton extends LinearOpMode {
 
             drive.followTrajectorySequence(pickup);
             cycleCounter++;
-            sleep(500);
-            dropdown.setPosition(Constants.dropdownautonpositionstart + cycleCounter * 0.03);
-            sleep(1000);
+
+            if (sleepCheck(500) > 0){
+                Constants.setIntake(-1);
+                blocker.setPosition(Constants.blockerClosedPosition);
+            }
+            else {
+                dropdown.setPosition(Constants.dropdownautonpositionstart + cycleCounter * 0.03);
+                if (sleepCheck(1000) > 0){
+                    Constants.setIntake(-1);
+                    blocker.setPosition(Constants.blockerClosedPosition);
+                }
+            }
             drive.followTrajectorySequence(drop);
             Constants.setIntake(0);
             blocker.setPosition(Constants.blockerOpenPosition);
@@ -310,6 +324,31 @@ public class RightRedAuton extends LinearOpMode {
             drive.followTrajectorySequence(reset);
             cycleCounter++;
         }
+    }
+
+    public int sleepCheck(int millis){
+        boolean timerStarted = false;
+        long timer = System.currentTimeMillis();
+
+        long startTime = System.currentTimeMillis();
+        while (System.currentTimeMillis() - startTime < millis){
+            if (colorSensor.green() > 150 && colorSensor.blue() > 150 && !timerStarted){
+                timerStarted = true;
+                timer = System.currentTimeMillis();
+            }
+            else if (colorSensor.green() > 150 && colorSensor.blue() > 150){
+                if (System.currentTimeMillis() - timer > 500){
+                    return 1;
+                }
+            }
+            else {
+                timerStarted = false;
+            }
+        }
+        if (timerStarted)
+            return 1;
+        else
+            return 0;
     }
 
 
