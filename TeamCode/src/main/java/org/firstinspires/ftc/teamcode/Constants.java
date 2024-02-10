@@ -33,7 +33,7 @@ public class Constants { //Declaring Class
     public static double tiltIntakePositionL = 0.55;//drop tilt position servo Left
     public static double tiltIntakePositionR = 0.95;//drop tilt position servo Right
 
-    public static double blockerOpenPosition = 0.5;
+    public static double blockerOpenPosition = 0.5;//hello
     public static double blockerClosedPosition = 1;
 
     public static double airplaneOpenPosition = 1;
