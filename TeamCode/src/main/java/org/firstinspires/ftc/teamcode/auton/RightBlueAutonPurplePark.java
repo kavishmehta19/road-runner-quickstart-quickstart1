@@ -128,8 +128,8 @@ public class RightBlueAutonPurplePark extends LinearOpMode {
                 .lineToLinearHeading(Constants.purplepixelleftBRoffset)
                 .addDisplacementMarker(()->{
                     dropdown.setPosition(Constants.dropdownPositionUp);
-
                 })
+                .lineToLinearHeading(Constants.purplepixelBRoffsetOffset)
                 .lineToLinearHeading(Constants.purplepixelBRoffset)
                 .build();
 
@@ -144,10 +144,12 @@ public class RightBlueAutonPurplePark extends LinearOpMode {
 
 
         TrajectorySequence yellowCenter = drive.trajectorySequenceBuilder(purplepixelcenterLoffset)
+                .lineToLinearHeading(Constants.whitepixelBlue2Halfway)
                 .lineToLinearHeading(Constants.whitepixelBlue2)
                 .build();
 
         TrajectorySequence yellowLeft = drive.trajectorySequenceBuilder(Constants.purplepixelBRoffset)
+                .lineToLinearHeading(Constants.whitepixelBlue2Halfway)
                 .lineToLinearHeading(Constants.whitepixelBlue2)
                 .build();
 

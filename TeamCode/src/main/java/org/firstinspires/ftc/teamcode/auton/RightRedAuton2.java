@@ -250,11 +250,13 @@ public class RightRedAuton2 extends LinearOpMode {
                     .lineToLinearHeading(Constants.whitepixelRed)
                     .lineToLinearHeading(Constants.whitepixeloffsetRed)
                     .addTemporalMarker(0.1, () -> {
-                        dropdown.setPosition(Constants.dropdownautonpositionstart + (currentCycleCounter * 0.03));
-                        Constants.setIntake(1);
                         tiltL.setPosition(Constants.tiltIntakePositionL);
                         tiltR.setPosition(Constants.tiltIntakePositionR);
                         Constants.setLift(0, 1);
+                    })
+                    .addTemporalMarker(1.5,()->{
+                        dropdown.setPosition(Constants.dropdownautonpositionstart + (currentCycleCounter * 0.03));
+                        Constants.setIntake(1);
                     })
                     .build();
             TrajectorySequence drop = drive.trajectorySequenceBuilder(Constants.whitepixeloffsetRed)
@@ -295,7 +297,7 @@ public class RightRedAuton2 extends LinearOpMode {
                 Constants.setIntake(-1);
                 blocker.setPosition(Constants.blockerClosedPosition);
             } else {
-                dropdown.setPosition(Constants.dropdownautonpositionstart - cycleCounter * 0.03);
+                dropdown.setPosition(Constants.dropdownautonpositionstart + cycleCounter * 0.025);
                 if (sleepCheck(1000) > 0) {
                     Constants.setIntake(-1);
                     blocker.setPosition(Constants.blockerClosedPosition);

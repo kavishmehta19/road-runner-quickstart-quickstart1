@@ -33,12 +33,15 @@ public class OneControllerCode extends LinearOpMode {
     Servo dropdown = null;
 
     Gamepad g1 = gamepad1;
+    Gamepad g2 = gamepad2;
 
     @Override
     public void runOpMode() throws InterruptedException {
         g1 = gamepad1;
+        g2 = gamepad2;
 
         g1.type = Gamepad.Type.SONY_PS4;
+        g2.type = Gamepad.Type.SONY_PS4;
 
         Constants.initHardware(hardwareMap);
 
@@ -119,10 +122,11 @@ public class OneControllerCode extends LinearOpMode {
 
             drive.setWeightedDrivePower(new Pose2d(y, x, turn));
 
-            intakeR.setPower(g1.right_trigger - g1.left_trigger);
-            intakeL.setPower(-(g1.right_trigger - g1.left_trigger));
+            double triggerSum = g1.right_trigger - g1.left_trigger;
+            intakeR.setPower(-triggerSum);
+            intakeL.setPower(triggerSum);
 
-            roller.setPower(-g1.right_trigger + g1.left_trigger);
+            roller.setPower(triggerSum);
 
             boolean rightBumper = g1.right_bumper;
             if (rightBumper && !lastRightBumper) {
@@ -194,8 +198,8 @@ public class OneControllerCode extends LinearOpMode {
                 liftL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 liftR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-                //liftL.setPower(g2.left_stick_y);
-                //liftR.setPower(-g2.left_stick_y);
+                liftL.setPower(g2.left_stick_y);
+                liftR.setPower(-g2.left_stick_y);
 
                 liftHittingTarget = false;
             }
@@ -206,21 +210,15 @@ public class OneControllerCode extends LinearOpMode {
                 timerRunning = false;
             }
 
-            if (g1.a) {
-                airplane.setPosition(airplaneOpenPosition);
-            } else {
-                airplane.setPosition(airplaneClosedPosition);
-            }
-
             if (g1.dpad_left) {
                 dropdownPosition = Constants.dropdownPositionUp;
             }
             if (g1.dpad_right) {
-                dropdownPosition = Constants.dropdownPositionDown;
+                dropdownPosition = Constants.dropdownPositionDown+ 0.02;
             }
 
             if (g1.dpad_up) {
-                dropdownPosition -= 0.001;
+
             }
             if (g1.dpad_down) {
                 dropdownPosition += 0.001;

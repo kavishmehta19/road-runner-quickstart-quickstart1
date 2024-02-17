@@ -67,8 +67,8 @@ public class SecondAutomation extends LinearOpMode {
         double tiltDropPositionL = 0.2;
         double tiltDropPositionR = 0.76;
 
-        double blockerOpenPosition = 0.5;
-        double blockerClosedPosition = 1;
+        double blockerOpenPosition = 0.62;
+        double blockerClosedPosition = 0.5;
 
         double airplaneOpenPosition = 1;
         double airplaneClosedPosition = 0;
@@ -122,10 +122,12 @@ public class SecondAutomation extends LinearOpMode {
 
             drive.setWeightedDrivePower(new Pose2d(y, x, turn));
 
-            intakeR.setPower(g2.right_trigger - g2.left_trigger);
-            intakeL.setPower(-(g2.right_trigger - g2.left_trigger));
+            double triggerSum = g2.right_trigger - g2.left_trigger;
 
-            roller.setPower(-g2.right_trigger + g2.left_trigger);
+            intakeR.setPower(-triggerSum);
+            intakeL.setPower(triggerSum);
+
+            roller.setPower(triggerSum);
 
             boolean rightBumper = g2.right_bumper;
             if (rightBumper && !lastRightBumper) {
@@ -221,18 +223,26 @@ public class SecondAutomation extends LinearOpMode {
                 airplane.setPosition(airplaneClosedPosition);
             }
 
-            if (g2.dpad_left){
+            if (g2.dpad_up){
                 dropdownPosition = Constants.dropdownPositionUp;
             }
-            if (g2.dpad_right){
+            if (g2.dpad_down){
                 dropdownPosition = Constants.dropdownPositionDown;
             }
 
-            if (g2.dpad_up){
+            if (g2.dpad_right){
                 dropdownPosition -= 0.001;
             }
-            if (g2.dpad_down){
+            if (g2.dpad_left){
                 dropdownPosition += 0.001;
+            }
+
+            if (g2.touchpad){
+                liftL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                liftL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+                liftR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                liftR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             }
 
             dropdown.setPosition(dropdownPosition);

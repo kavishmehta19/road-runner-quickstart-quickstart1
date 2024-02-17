@@ -191,8 +191,8 @@ public class LeftBlueAuton2 extends LinearOpMode {
                 .build();
 
         TrajectorySequence parkLeft = drive.trajectorySequenceBuilder(Constants.yellowpixelleftBL)
-                .addTemporalMarker(0.2, ()->{
-                    Constants.setLift(Constants.liftTargetMid,1);
+                .addTemporalMarker(0.01, ()->{
+                    Constants.setLift(Constants.liftTargetMid - 200,1);
                 })
                 .lineToLinearHeading(parkL)
                 .build();
