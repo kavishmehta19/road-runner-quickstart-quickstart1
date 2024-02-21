@@ -128,8 +128,8 @@ public class RightBlueAuton extends LinearOpMode {
                 .lineToLinearHeading(Constants.purplepixelleftBRoffset)
                 .addDisplacementMarker(()->{
                     dropdown.setPosition(Constants.dropdownPositionUp);
-
                 })
+                .lineToLinearHeading(Constants.purplepixelBRoffsetOffset)
                 .lineToLinearHeading(Constants.purplepixelBRoffset)
                 .build();
 
@@ -144,83 +144,106 @@ public class RightBlueAuton extends LinearOpMode {
 
 
         TrajectorySequence yellowCenter = drive.trajectorySequenceBuilder(purplepixelcenterLoffset)
-                .addTemporalMarker(2.3, ()->{
+                .addTemporalMarker(2.5, () -> {
+                    Constants.setLift(Constants.liftTargetLow, 1);
                     blocker.setPosition(Constants.blockerClosedPosition);
-                    Constants.setLift(Constants.liftTargetAuton, 1);
                 })
-                .addTemporalMarker(2.6, ()->{
+                .addTemporalMarker(3.5, () -> {
                     tiltL.setPosition(Constants.tiltDropPositionL);
                     tiltR.setPosition(Constants.tiltDropPositionR);
                 })
-                .lineToLinearHeading(Constants.whitepixelBlue)
-                .lineToLinearHeading(yellowpixelcenterL)
+                .lineToLinearHeading(Constants.prepareDropBR)
+                .addDisplacementMarker(() -> {
+                    Constants.setIntake(0);
+                })
+                .lineToLinearHeading(Constants.yellowFarDropCenterBR)
+                .addDisplacementMarker(()->{
+                    blocker.setPosition(Constants.blockerOpenPosition);
+
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.1,()->{
+                    Constants.setLift(Constants.liftTargetMid, 1);
+
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {
+                    tiltL.setPosition(Constants.tiltIntakePositionL);
+                    tiltR.setPosition(Constants.tiltIntakePositionR);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
+                    Constants.setLift(0, 1);
+                })
+
+                .lineToLinearHeading(Constants.yellowFarDropBROffset)
+                .lineToLinearHeading(Constants.yellowFarDropBROffset2)
+                .lineToLinearHeading(Constants.whitepixelBlue2)
                 .build();
 
         TrajectorySequence yellowLeft = drive.trajectorySequenceBuilder(Constants.purplepixelBRoffset)
-                .addTemporalMarker(3.4, ()->{
+                .addTemporalMarker(2.5, () -> {
+                    Constants.setLift(Constants.liftTargetLow, 1);
                     blocker.setPosition(Constants.blockerClosedPosition);
-                    Constants.setLift(Constants.liftTargetAuton, 1);
                 })
-                .addTemporalMarker(3.8, ()->{
+                .addTemporalMarker(3.5, () -> {
                     tiltL.setPosition(Constants.tiltDropPositionL);
                     tiltR.setPosition(Constants.tiltDropPositionR);
                 })
-                .lineToLinearHeading(Constants.whitepixelBlue)
-                .lineToLinearHeading(Constants.yellowpixelleftBR)
+                .lineToLinearHeading(Constants.prepareDropBR)
+                .addDisplacementMarker(() -> {
+                    Constants.setIntake(0);
+                })
+                .lineToLinearHeading(Constants.yellowFarDropLeftBR)
+                .addDisplacementMarker(()->{
+                    blocker.setPosition(Constants.blockerOpenPosition);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.1,()->{
+                    Constants.setLift(Constants.liftTargetMid, 1);
+
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {
+                    tiltL.setPosition(Constants.tiltIntakePositionL);
+                    tiltR.setPosition(Constants.tiltIntakePositionR);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
+                    Constants.setLift(0, 1);
+                })
+                .lineToLinearHeading(Constants.yellowFarDropBROffset)
+                .lineToLinearHeading(Constants.yellowFarDropBROffset2)
+                .lineToLinearHeading(Constants.whitepixelBlue2)
                 .build();
 
         TrajectorySequence yellowRight = drive.trajectorySequenceBuilder(Constants.purplepixelBRoffset)
-                .addTemporalMarker(3.4, ()->{
+                .addTemporalMarker(2.5, () -> {
                     Constants.setLift(Constants.liftTargetLow, 1);
+                    blocker.setPosition(Constants.blockerClosedPosition);
                 })
-                .addTemporalMarker(3.8, ()->{
+                .addTemporalMarker(3.5, () -> {
                     tiltL.setPosition(Constants.tiltDropPositionL);
                     tiltR.setPosition(Constants.tiltDropPositionR);
                 })
-                .lineToLinearHeading(Constants.whitepixelBlue)
-                .lineToLinearHeading(Constants.yellowpixelrightBR)
-                .build();
-
-
-
-        TrajectorySequence parkCenter = drive.trajectorySequenceBuilder(yellowpixelcenterL)
-                .addTemporalMarker(0.1, ()->{
-                    Constants.setLift(Constants.liftTargetMid, 1);
+                .lineToLinearHeading(Constants.prepareDropBR)
+                .addDisplacementMarker(() -> {
+                    Constants.setIntake(0);
                 })
+                .lineToLinearHeading(Constants.yellowFarDropRightBR)
+                .addDisplacementMarker(()->{
+                    blocker.setPosition(Constants.blockerOpenPosition);
+                    sleep(500);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.1,()->{
+                    Constants.setLift(Constants.liftTargetMid, 1);
 
-                .addTemporalMarker(0.4, ()->{
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.7, () -> {
                     tiltL.setPosition(Constants.tiltIntakePositionL);
                     tiltR.setPosition(Constants.tiltIntakePositionR);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                     Constants.setLift(0, 1);
                 })
-                .lineToLinearHeading(parkL)
+                .lineToLinearHeading(Constants.yellowFarDropBROffset)
+                .lineToLinearHeading(Constants.yellowFarDropBROffset2)
+                .lineToLinearHeading(Constants.whitepixelBlue2)
                 .build();
-
-        TrajectorySequence parkLeft = drive.trajectorySequenceBuilder(Constants.yellowpixelleftBR)
-                .addTemporalMarker(0.1, ()->{
-                    Constants.setLift(Constants.liftTargetMid, 1);
-                })
-                .addTemporalMarker(0.4, ()->{
-                    tiltL.setPosition(Constants.tiltIntakePositionL);
-                    tiltR.setPosition(Constants.tiltIntakePositionR);
-                    Constants.setLift(0, 1);
-                })
-                .lineToLinearHeading(parkL)
-                .build();
-
-        TrajectorySequence parkRight = drive.trajectorySequenceBuilder(Constants.yellowpixelrightBR)
-                .addTemporalMarker(0.1, ()->{
-                    Constants.setLift(Constants.liftTargetMid, 1);
-                })
-                .addTemporalMarker(0.4, ()->{
-                    tiltL.setPosition(Constants.tiltIntakePositionL);
-                    tiltR.setPosition(Constants.tiltIntakePositionR);
-                    Constants.setLift(0, 1);
-                })
-                .lineToLinearHeading(parkL)
-                .build();
-
-
 
 
         waitForStart();
@@ -236,25 +259,19 @@ public class RightBlueAuton extends LinearOpMode {
             telemetry.addData("Position", pipeline.position);
             telemetry.update();
 
-            dropdown.setPosition(Constants.dropdownPositionDown);
-            sleep(500);
+            dropdown.setPosition(Constants.dropdownPositionStart);
+            sleep(800);
 
             if (position == OpenCVDebug.CenterStagePipeline.Position.LEFT) {
                 drive.followTrajectorySequence(purpleLeft);
                 drive.followTrajectorySequence(yellowLeft);
-                sleep(500);
-                blocker.setPosition(Constants.blockerOpenPosition);
-                sleep(500);
-                drive.followTrajectorySequence(parkLeft);
+
 
             }
             else if (position == OpenCVDebug.CenterStagePipeline.Position.CENTER) {
                 drive.followTrajectorySequence(purpleCenter);
                 drive.followTrajectorySequence(yellowCenter);
-                sleep(200);
-                blocker.setPosition(Constants.blockerOpenPosition);
-                sleep(200);
-                drive.followTrajectorySequence(parkCenter);
+
 
             }
             else {
@@ -262,10 +279,6 @@ public class RightBlueAuton extends LinearOpMode {
                 dropdown.setPosition(Constants.dropdownPositionUp);
                 sleep(300);
                 drive.followTrajectorySequence(yellowRight);
-                sleep(500);
-                blocker.setPosition(Constants.blockerOpenPosition);
-                sleep(500);
-                drive.followTrajectorySequence(parkRight);
             }
             sleep(2000);
 

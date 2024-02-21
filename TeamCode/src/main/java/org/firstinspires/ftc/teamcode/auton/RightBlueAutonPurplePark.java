@@ -172,8 +172,8 @@ public class RightBlueAutonPurplePark extends LinearOpMode {
             telemetry.addData("Position", pipeline.position);
             telemetry.update();
 
-            dropdown.setPosition(Constants.dropdownPositionDown);
-            sleep(500);
+            dropdown.setPosition(Constants.dropdownPositionStart);
+            sleep(800);
 
             if (position == OpenCVDebug.CenterStagePipeline.Position.LEFT) {
                 drive.followTrajectorySequence(purpleLeft);

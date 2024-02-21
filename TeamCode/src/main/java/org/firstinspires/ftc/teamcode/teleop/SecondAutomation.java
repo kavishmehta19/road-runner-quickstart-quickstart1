@@ -73,6 +73,11 @@ public class SecondAutomation extends LinearOpMode {
         double airplaneOpenPosition = 1;
         double airplaneClosedPosition = 0;
 
+        double tiltPositionL = Constants.tiltIntakePositionL;
+        double tiltPositionR = Constants.tiltIntakePositionR;
+        tiltL.setPosition(tiltPositionL);
+        tiltR.setPosition(tiltPositionR);
+
         double dropdownPosition = Constants.dropdownPositionUp;
         dropdown.setPosition(Constants.dropdownPositionUp);
 
@@ -144,11 +149,11 @@ public class SecondAutomation extends LinearOpMode {
             boolean leftBumper = g2.left_bumper;
             if (leftBumper && !lastLeftBumper) {
                 if (tiltDropping) {
-                    tiltL.setPosition(Constants.tiltIntakePositionL);
-                    tiltR.setPosition(Constants.tiltIntakePositionR);
+                    tiltPositionL = (Constants.tiltIntakePositionL);
+                    tiltPositionR = (Constants.tiltIntakePositionR);
                 } else {
-                    tiltL.setPosition(Constants.tiltDropPositionL);
-                    tiltR.setPosition(Constants.tiltDropPositionR);
+                    tiltPositionL = (Constants.tiltDropPositionL);
+                    tiltPositionR = (Constants.tiltDropPositionR);
                 }
                 tiltDropping = !tiltDropping;
             }
@@ -197,8 +202,8 @@ public class SecondAutomation extends LinearOpMode {
                     blocker.setPosition(blockerOpenPosition);
                     blockerOpen = true;
 
-                    tiltL.setPosition(Constants.tiltIntakePositionL);
-                    tiltR.setPosition(Constants.tiltIntakePositionR);
+                    tiltPositionL = (Constants.tiltIntakePositionL);
+                    tiltPositionR = (Constants.tiltIntakePositionR);
                 }
             } else {
                 liftL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -211,8 +216,8 @@ public class SecondAutomation extends LinearOpMode {
             }
 
             if (timerRunning && System.currentTimeMillis() - timer > 300){
-                tiltL.setPosition(Constants.tiltDropPositionL);
-                tiltR.setPosition(Constants.tiltDropPositionR);
+                tiltPositionL = (Constants.tiltDropPositionL);
+                tiltPositionR = (Constants.tiltDropPositionR);
                 timerRunning = false;
             }
 
@@ -236,6 +241,19 @@ public class SecondAutomation extends LinearOpMode {
             if (g2.dpad_left){
                 dropdownPosition += 0.001;
             }
+
+            double tiltMultiplier = (Constants.tiltDropPositionR - Constants.tiltIntakePositionR) / (Constants.tiltIntakePositionL - Constants.tiltDropPositionL);
+
+            tiltPositionL -= 0.001 * g2.right_stick_y;
+            tiltPositionR += 0.001 * g2.right_stick_y * tiltMultiplier;
+
+            if (tiltPositionL > Constants.tiltDropPositionL) tiltPositionL = Constants.tiltDropPositionL;
+            if (tiltPositionL < Constants.tiltIntakePositionL) tiltPositionL = Constants.tiltIntakePositionL;
+            if (tiltPositionR > Constants.tiltIntakePositionR) tiltPositionR = Constants.tiltIntakePositionR;
+            if (tiltPositionR < Constants.tiltDropPositionR) tiltPositionR = Constants.tiltDropPositionR;
+
+            tiltL.setPosition(tiltPositionL);
+            tiltR.setPosition(tiltPositionR);
 
             if (g2.touchpad){
                 liftL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
