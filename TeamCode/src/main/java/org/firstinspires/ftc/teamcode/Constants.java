@@ -27,8 +27,8 @@ public class Constants { //Declaring Class
     public static Servo airplane;
     public static Servo dropdown; // Dropdown intake
 
-    public static double tiltDropPositionL = 0.865;//intake tilt position servo Left
-    public static double tiltDropPositionR = 0.665;//intake tilt position servo Right
+    public static double tiltDropPositionL = 0.867;//intake tilt position servo Left
+    public static double tiltDropPositionR = 0.663;//intake tilt position servo Right
 
     public static double tiltIntakePositionL = 0.54;//drop tilt position servo Left
     public static double tiltIntakePositionR = 0.96;//drop tilt position servo Right
@@ -40,9 +40,9 @@ public class Constants { //Declaring Class
     public static double dropdownPositionUp = 0;
     public static double dropdownPositionDown = .658;
 
-    public static double dropdownIntakeStart = 0.515; // Dropdown at start of autonomous
-    public static double dropdownPositionAuton = 0.677;
-    public static double dropdownIncrement = 0.037;
+    public static double dropdownIntakeStart = 0.532;
+    public static double dropdownPositionAuton = 0.677; // Dropdown at start of autonomous
+    public static double dropdownIncrement = 0.03;
 
 /* BR */
     public static Pose2d startBR = new Pose2d(60, 43, Math.toRadians(180));
@@ -58,8 +58,8 @@ public class Constants { //Declaring Class
     public static Pose2d prepareDropBR = new Pose2d(16,-20,Math.toRadians(90));
 
     public static Pose2d yellowCenterBR = new Pose2d(42.5,-35,Math.toRadians(90));
-    public static Pose2d yellowLeftBR = new Pose2d(49.5,-33,Math.toRadians(90));
-    public static Pose2d yellowRightBR = new Pose2d(35 ,-35,Math.toRadians(90));
+    public static Pose2d yellowLeftBR = new Pose2d(49.5,-35,Math.toRadians(90));
+    public static Pose2d yellowRightBR = new Pose2d(35 ,-35.5,Math.toRadians(90));
     public static Pose2d yellowResetBR = new Pose2d(42,-26,Math.toRadians(90));
 
     public static Pose2d farParkOffsetBR = new Pose2d(16,-26,Math.toRadians(90));
@@ -76,18 +76,18 @@ public class Constants { //Declaring Class
     public static Pose2d purpleLeftOffsetBL = new Pose2d(36,-24,Math.toRadians(180)); // Retrieves the x-coordinate of purplepixelleftBL with y-coordinate of -24, turns 180 degrees
     public static Pose2d purpleRightOffsetBL = new Pose2d(40,-6,Math.toRadians(180));
 
-    public static Pose2d backdropCenterBL = new Pose2d(35, -34.5, Math.toRadians(90));
-    public static Pose2d backdropLeftBL = new Pose2d(39,-34,Math.toRadians(90));
-    public static Pose2d backdropRightBL = new Pose2d(28,-33.5,Math.toRadians(90));
+    public static Pose2d backdropCenterBL = new Pose2d(35, -36.7, Math.toRadians(90));
+    public static Pose2d backdropLeftBL = new Pose2d(39,-36.7,Math.toRadians(90));
+    public static Pose2d backdropRightBL = new Pose2d(28,-36.7,Math.toRadians(90));
 
     public static Pose2d crossOffsetBL = new Pose2d(13, -10, Math.toRadians(90));
-    public static Pose2d whitePickupBL = new Pose2d(13, 74.4, Math.toRadians(90));
+    public static Pose2d whitePickupBL = new Pose2d(13, 74, Math.toRadians(90));
 
     public static Pose2d midParkBL = new Pose2d(36, -30, Math.toRadians(90));
     public static Pose2d farParkOffsetBL = new Pose2d(13,-30,Math.toRadians(90));
     public static Pose2d farParkBL = new Pose2d(13,-44,Math.toRadians(90));
-    public static Pose2d closeParkOffsetBL = new Pose2d(50,-30, Math.toRadians(90));
-    public static Pose2d closeParkBL = new Pose2d(50,-44, Math.toRadians(90));
+    public static Pose2d closeParkOffsetBL = new Pose2d(59,-30, Math.toRadians(90));
+    public static Pose2d closeParkBL = new Pose2d(59,-44, Math.toRadians(90));
 /* END BL */
 
 /* RR */
@@ -119,10 +119,10 @@ public class Constants { //Declaring Class
 
 /* RL */
     public static Pose2d startRL = new Pose2d(-60, 43, Math.toRadians(0));
-    public static Pose2d startOffsetRL = new Pose2d(-55, 57, Math.toRadians(0));
+    public static Pose2d startOffsetRL = new Pose2d(-55, 59, Math.toRadians(0));
 
     public static Pose2d purpleCenterRL = new Pose2d(-22, 40, Math.toRadians(-90));
-    public static Pose2d purpleLeftRL = new Pose2d(-32, 39, Math.toRadians(180));
+    public static Pose2d purpleLeftRL = new Pose2d(-32, 40.5, Math.toRadians(180));
     public static Pose2d purpleLeftOffsetRL = new Pose2d(-20, 60, Math.toRadians(90));
     public static Pose2d purpleRightOffsetRL = new Pose2d(-30,45,Math.toRadians(-90));
     public static Pose2d purpleRightRL = new Pose2d(-30,30,Math.toRadians(-90));
@@ -130,9 +130,9 @@ public class Constants { //Declaring Class
 
     public static Pose2d prepareDropRL = new Pose2d(-18,-30,Math.toRadians(90));
 
-    public static Pose2d yellowCenterRL = new Pose2d(-42.5,-44,Math.toRadians(90));
-    public static Pose2d yellowLeftRL = new Pose2d(-36,-44,Math.toRadians(90));
-    public static Pose2d yellowRightRL = new Pose2d(-49.5,-44,Math.toRadians(90));
+    public static Pose2d yellowCenterRL = new Pose2d(-42.5,-44.5,Math.toRadians(90));
+    public static Pose2d yellowLeftRL = new Pose2d(-36,-44.5,Math.toRadians(90));
+    public static Pose2d yellowRightRL = new Pose2d(-49.5,-44.5,Math.toRadians(90));
     public static Pose2d yellowOffsetRL = new Pose2d(-42,-36,Math.toRadians(90));
 
     public static Pose2d farParkOffsetRL = new Pose2d(-18,-36,Math.toRadians(90));

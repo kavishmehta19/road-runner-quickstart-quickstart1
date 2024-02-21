@@ -210,7 +210,7 @@ public class LeftBlueAuton extends LinearOpMode {
             telemetry.update();
 
             dropdown.setPosition(Constants.dropdownPositionAuton);
-            sleep(500);
+            sleep(800);
 
             if (position == OpenCVDebug.CenterStagePipeline.Position.LEFT) {
                 drive.followTrajectorySequence(purpleLeft);

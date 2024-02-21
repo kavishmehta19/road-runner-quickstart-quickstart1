@@ -265,11 +265,11 @@ public class RightRedAuton2 extends LinearOpMode {
                     })
                     .addTemporalMarker(3.0,()->{
                         dropdown.setPosition(Constants.dropdownIntakeStart + (currentCycleCounter * Constants.dropdownIncrement));
-                        Constants.setIntake(1);
+                        Constants.setIntake(0.9);
                     })
                     .build();
             TrajectorySequence drop = drive.trajectorySequenceBuilder(Constants.whitePickupRR)
-                    .addTemporalMarker(0.2,()->{
+                    .addTemporalMarker(0.4,()->{
                         dropdown.setPosition(Constants.dropdownPositionDown);
                     })
                     .addTemporalMarker(2.5, () -> {

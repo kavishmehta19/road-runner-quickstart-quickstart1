@@ -126,7 +126,9 @@ public class LeftRedAuton extends LinearOpMode {
                 .addDisplacementMarker(() -> {
                     Constants.setIntake(0);
                 })
+                .lineToLinearHeading(Constants.yellowOffsetRL)
                 .lineToLinearHeading(Constants.yellowCenterRL)
+                .waitSeconds(0.5)
                 .addDisplacementMarker(()->{
                     blocker.setPosition(Constants.blockerOpenPosition);
                     sleep(300);
@@ -160,7 +162,9 @@ public class LeftRedAuton extends LinearOpMode {
                 .addDisplacementMarker(() -> {
                     Constants.setIntake(0);
                 })
+                .lineToLinearHeading(Constants.yellowOffsetRL)
                 .lineToLinearHeading(Constants.yellowLeftRL)
+                .waitSeconds(0.5)
                 .addDisplacementMarker(()->{
                     blocker.setPosition(Constants.blockerOpenPosition);
                     sleep(300);
@@ -194,6 +198,7 @@ public class LeftRedAuton extends LinearOpMode {
                 .addDisplacementMarker(() -> {
                     Constants.setIntake(0);
                 })
+                .lineToLinearHeading(Constants.yellowOffsetRL)
                 .lineToLinearHeading(Constants.yellowRightRL)
                 .addDisplacementMarker(()->{
                     blocker.setPosition(Constants.blockerOpenPosition);
