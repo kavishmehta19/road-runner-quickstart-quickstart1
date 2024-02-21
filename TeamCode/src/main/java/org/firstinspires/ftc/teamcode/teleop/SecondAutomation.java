@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
-@TeleOp(name="Second Automation1")
+@TeleOp(name="Regionals")
 public class SecondAutomation extends LinearOpMode {
 
     SampleMecanumDrive drive;
@@ -61,15 +61,6 @@ public class SecondAutomation extends LinearOpMode {
         drive = new SampleMecanumDrive(hardwareMap);
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        double tiltIntakePositionL = 0.92;
-        double tiltIntakePositionR = 0.06;
-
-        double tiltDropPositionL = 0.2;
-        double tiltDropPositionR = 0.76;
-
-        double blockerOpenPosition = 0.62;
-        double blockerClosedPosition = 0.5;
-
         double airplaneOpenPosition = 1;
         double airplaneClosedPosition = 0;
 
@@ -98,7 +89,7 @@ public class SecondAutomation extends LinearOpMode {
         boolean lastLeftBumper = false;
 
         boolean blockerOpen = true;
-        blocker.setPosition(blockerOpenPosition);
+        blocker.setPosition(Constants.blockerOpenPosition);
 
         waitForStart();
 
@@ -115,7 +106,6 @@ public class SecondAutomation extends LinearOpMode {
 
             if (Math.abs(x) < 0.4 && Math.abs(y) > 0.5)
                 x = 0;
-
 
             if (y < 0) yMultiplier *= -1;
             if (x < 0) xMultiplier *= -1;
@@ -137,9 +127,9 @@ public class SecondAutomation extends LinearOpMode {
             boolean rightBumper = g2.right_bumper;
             if (rightBumper && !lastRightBumper) {
                 if (blockerOpen) {
-                    blocker.setPosition(blockerClosedPosition);
+                    blocker.setPosition(Constants.blockerClosedPosition);
                 } else {
-                    blocker.setPosition(blockerOpenPosition);
+                    blocker.setPosition(Constants.blockerOpenPosition);
                 }
                 blockerOpen = !blockerOpen;
 
@@ -190,7 +180,7 @@ public class SecondAutomation extends LinearOpMode {
             if ((liftHittingTarget && (Math.abs(liftTarget - liftL.getCurrentPosition()) > 20) || triggers) && !g2.right_stick_button) {
                 Constants.setLift(liftTarget, 1);
                 if (depositing){
-                    blocker.setPosition(blockerClosedPosition);
+                    blocker.setPosition(Constants.blockerClosedPosition);
                     blockerOpen = false;
 
                     if (!timerRunning) {
@@ -199,7 +189,7 @@ public class SecondAutomation extends LinearOpMode {
                     }
                 }
                 else {
-                    blocker.setPosition(blockerOpenPosition);
+                    blocker.setPosition(Constants.blockerOpenPosition);
                     blockerOpen = true;
 
                     tiltPositionL = (Constants.tiltIntakePositionL);

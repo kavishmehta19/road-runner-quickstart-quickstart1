@@ -30,7 +30,7 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name="Left Blue Auton")
+@Autonomous(name="Left Blue Auton 2+0")
 
 public class LeftBlueAuton extends LinearOpMode {
 
@@ -54,20 +54,9 @@ public class LeftBlueAuton extends LinearOpMode {
     WebcamName webcamName;
     OpenCVDebug.CenterStagePipeline pipeline;
 
-    TrajectoryVelocityConstraint v;
-    TrajectoryAccelerationConstraint a;
-
     CRServo roller;
 
-    int numcycles = 3;
-
-    Pose2d startPose = Constants.startPoseBL;
-    Pose2d purplepixelcenterL = Constants.purplepixelcenterBL;
-
-    Pose2d purplepixelleftL = Constants.purplepixelleftBL;
-    Pose2d purplepixelcenterLoffset = Constants.purplepixelcenterBLoffset;
-    Pose2d yellowpixelcenterL = Constants.yellowpixelcenterBL;
-    Pose2d parkL = Constants.parkL;
+    int numCycles = 0;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -92,20 +81,6 @@ public class LeftBlueAuton extends LinearOpMode {
         blocker.setPosition(Constants.blockerClosedPosition);
         dropdown.setPosition(Constants.dropdownPositionUp);
 
-        v = new TrajectoryVelocityConstraint() {
-            @Override
-            public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                return 50;
-            }
-        };
-
-        a = new TrajectoryAccelerationConstraint() {
-            @Override
-            public double get(double v, @NonNull Pose2d pose2d, @NonNull Pose2d pose2d1, @NonNull Pose2d pose2d2) {
-                return 50;
-            }
-        };
-
         webcamName = hardwareMap.get(WebcamName.class, "webcam");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         phoneCam = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId);
@@ -125,29 +100,29 @@ public class LeftBlueAuton extends LinearOpMode {
 
         drive = new SampleMecanumDrive(hardwareMap);
 
-        TrajectorySequence purpleCenter = drive.trajectorySequenceBuilder(startPose)
-                .splineToSplineHeading(purplepixelcenterL, purplepixelcenterL.getHeading())
+        TrajectorySequence purpleCenter = drive.trajectorySequenceBuilder(Constants.startBL)
+                .lineToLinearHeading(Constants.purpleCenterBL)
                 .addDisplacementMarker(()->{
                     dropdown.setPosition(Constants.dropdownPositionUp);
                 })
-                .splineToSplineHeading(purplepixelcenterLoffset, purplepixelcenterL.getHeading())
+                .lineToLinearHeading(Constants.purpleCenterOffsetBL)
                 .build();
 
-        TrajectorySequence purpleLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(purplepixelleftL)
+        TrajectorySequence purpleLeft = drive.trajectorySequenceBuilder(Constants.startBL)
+                .lineToLinearHeading(Constants.purpleLeftBL)
                 .addDisplacementMarker(()->{
                     dropdown.setPosition(Constants.dropdownPositionUp);
                     sleep(300);
                 })
-                .lineToLinearHeading(Constants.purplepixelleftBLoffset)
+                .lineToLinearHeading(Constants.purpleLeftOffsetBL)
                 .build();
 
-        TrajectorySequence purpleRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(Constants.purplepixelrightBLoffset)
-                .lineToLinearHeading(Constants.purplepixelrightBL)
+        TrajectorySequence purpleRight = drive.trajectorySequenceBuilder(Constants.startBL)
+                .lineToLinearHeading(Constants.purpleRightOffsetBL)
+                .lineToLinearHeading(Constants.purpleRightBL)
                 .build();
 
-        TrajectorySequence yellowCenter = drive.trajectorySequenceBuilder(purplepixelcenterLoffset)
+        TrajectorySequence yellowCenter = drive.trajectorySequenceBuilder(Constants.purpleCenterOffsetBL)
                 .addTemporalMarker(0.1, ()->{
                     Constants.setLift(Constants.liftTargetAuton, 1);
                 })
@@ -155,10 +130,10 @@ public class LeftBlueAuton extends LinearOpMode {
                     tiltL.setPosition(Constants.tiltDropPositionL);
                     tiltR.setPosition(Constants.tiltDropPositionR);
                 })
-                .lineToLinearHeading(yellowpixelcenterL)
+                .lineToLinearHeading(Constants.backdropCenterBL)
                 .build();
 
-        TrajectorySequence yellowLeft = drive.trajectorySequenceBuilder(Constants.purplepixelleftBLoffset)
+        TrajectorySequence yellowLeft = drive.trajectorySequenceBuilder(Constants.purpleLeftOffsetBL)
                 .addTemporalMarker(0.1, ()->{
                     Constants.setLift(Constants.liftTargetAuton, 1);
                 })
@@ -166,10 +141,10 @@ public class LeftBlueAuton extends LinearOpMode {
                     tiltL.setPosition(Constants.tiltDropPositionL);
                     tiltR.setPosition(Constants.tiltDropPositionR);
                 })
-                .lineToLinearHeading(Constants.yellowpixelleftBL)
+                .lineToLinearHeading(Constants.backdropLeftBL)
                 .build();
 
-        TrajectorySequence yellowRight = drive.trajectorySequenceBuilder(Constants.purplepixelrightBL)
+        TrajectorySequence yellowRight = drive.trajectorySequenceBuilder(Constants.purpleRightBL)
                 .addTemporalMarker(0.1, ()->{
                     Constants.setLift(Constants.liftTargetAuton, 1);
                 })
@@ -177,40 +152,49 @@ public class LeftBlueAuton extends LinearOpMode {
                     tiltL.setPosition(Constants.tiltDropPositionL);
                     tiltR.setPosition(Constants.tiltDropPositionR);
                 })
-                .lineToLinearHeading(Constants.yellowpixelrightBL)
+                .lineToLinearHeading(Constants.backdropRightBL)
                 .build();
 
 
 
-        TrajectorySequence parkCenter = drive.trajectorySequenceBuilder(yellowpixelcenterL)
+        TrajectorySequence parkCenter = drive.trajectorySequenceBuilder(Constants.backdropCenterBL)
                 .addTemporalMarker(0.4, ()->{
                     tiltL.setPosition(Constants.tiltIntakePositionL);
                     tiltR.setPosition(Constants.tiltIntakePositionR);
                     Constants.setLift(0, 1);
                 })
-                .lineToLinearHeading(parkL)
+                .lineToLinearHeading(Constants.midParkBL)
+                .lineToLinearHeading(Constants.closeParkOffsetBL)
+                .lineToLinearHeading(Constants.closeParkBL)
                 .build();
 
-        TrajectorySequence parkLeft = drive.trajectorySequenceBuilder(Constants.yellowpixelleftBL)
+        TrajectorySequence parkLeft = drive.trajectorySequenceBuilder(Constants.backdropLeftBL)
                 .addTemporalMarker(0.2, ()->{
                     tiltL.setPosition(Constants.tiltIntakePositionL);
                     tiltR.setPosition(Constants.tiltIntakePositionR);
                     Constants.setLift(0, 1);
                 })
-                .lineToLinearHeading(parkL)
+                .lineToLinearHeading(Constants.midParkBL)
+                .lineToLinearHeading(Constants.closeParkOffsetBL)
+                .lineToLinearHeading(Constants.closeParkBL)
                 .build();
 
-        TrajectorySequence parkRight = drive.trajectorySequenceBuilder(Constants.yellowpixelrightBL)
+        TrajectorySequence parkRight = drive.trajectorySequenceBuilder(Constants.backdropRightBL)
                 .addTemporalMarker(0.4, ()->{
                     tiltL.setPosition(Constants.tiltIntakePositionL);
                     tiltR.setPosition(Constants.tiltIntakePositionR);
                     Constants.setLift(0, 1);
                 })
-                .lineToLinearHeading(parkL)
+                .lineToLinearHeading(Constants.midParkBL)
+                .lineToLinearHeading(Constants.closeParkOffsetBL)
+                .lineToLinearHeading(Constants.closeParkBL)
                 .build();
 
-
-
+        while (!isStarted()) {
+            telemetry.addData("Analysis", pipeline.getAnalysis());
+            telemetry.addData("Position", pipeline.position);
+            telemetry.update();
+        }
 
         waitForStart();
 
@@ -218,14 +202,14 @@ public class LeftBlueAuton extends LinearOpMode {
 
         while (opModeIsActive() && !isStopRequested()) {
 
-            drive.setPoseEstimate(startPose);
+            drive.setPoseEstimate(Constants.startBL);
 
             OpenCVDebug.CenterStagePipeline.Position position = pipeline.position;
             telemetry.addData("Analysis", pipeline.getAnalysis());
             telemetry.addData("Position", pipeline.position);
             telemetry.update();
 
-            dropdown.setPosition(Constants.dropdownPositionDown);
+            dropdown.setPosition(Constants.dropdownPositionAuton);
             sleep(500);
 
             if (position == OpenCVDebug.CenterStagePipeline.Position.LEFT) {
@@ -262,70 +246,5 @@ public class LeftBlueAuton extends LinearOpMode {
 
         }
     }
-
-    public void runCycles(SampleMecanumDrive drive) {
-        int cycleCounter = 0;
-        while (cycleCounter < numcycles && opModeIsActive()) {
-            int currentCycleCounter = cycleCounter;
-            TrajectorySequence pickup = drive.trajectorySequenceBuilder(parkL)
-                    .setVelConstraint(v)
-                    .setAccelConstraint(a)
-                    .lineToLinearHeading(Constants.whitepixelBlue)
-                    .lineToLinearHeading(Constants.whitepixeloffsetBlueLeft)
-                    .addTemporalMarker(0.1,()->{
-                        dropdown.setPosition(Constants.dropdownautonpositionstart + (currentCycleCounter * 0.03));
-                        Constants.setIntake(0.6);
-                        tiltL.setPosition(Constants.tiltIntakePositionL);
-                        tiltR.setPosition(Constants.tiltIntakePositionR);
-                        Constants.setLift(0, 1);
-                    })
-                    .build();
-            TrajectorySequence drop = drive.trajectorySequenceBuilder(Constants.whitepixeloffsetBlueLeft)
-                    .addTemporalMarker(2.5, ()->{
-                        Constants.setLift(Constants.liftTargetMid, 1);
-                        blocker.setPosition(Constants.blockerClosedPosition);
-                    })
-                    .addTemporalMarker(3.5, ()->{
-                        tiltL.setPosition(Constants.tiltDropPositionL);
-                        tiltR.setPosition(Constants.tiltDropPositionR);
-                    })
-                    .lineToLinearHeading(Constants.whitepixelBlue)
-                    .addDisplacementMarker(()->{
-                        Constants.setIntake(0);
-                    })
-                    .lineToLinearHeading(yellowpixelcenterL)
-                    .build();
-
-            TrajectorySequence reset = drive.trajectorySequenceBuilder(yellowpixelcenterL)
-                    .resetConstraints()
-                    .lineToLinearHeading(parkL)
-                    .addTemporalMarker(0.2, ()->{
-                        Constants.setLift(Constants.liftTargetMid - 300,1);
-                    })
-                    .addTemporalMarker(0.6, ()->{
-                        tiltL.setPosition(Constants.tiltIntakePositionL);
-                        tiltR.setPosition(Constants.tiltIntakePositionR);
-
-                    })
-                    .addTemporalMarker(0.8, ()->{
-                        Constants.setLift(0, 1);
-                    })
-                    .build();
-
-            drive.followTrajectorySequence(pickup);
-            cycleCounter++;
-            sleep(500);
-            dropdown.setPosition(Constants.dropdownautonpositionstart + cycleCounter * 0.03);
-            sleep(1000);
-            drive.followTrajectorySequence(drop);
-            Constants.setIntake(0);
-            blocker.setPosition(Constants.blockerOpenPosition);
-            sleep(300);
-            drive.followTrajectorySequence(reset);
-            cycleCounter++;
-        }
-    }
-
-
 }
 

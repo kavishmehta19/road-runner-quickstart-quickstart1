@@ -22,7 +22,7 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name="Left Red Auton")
+@Autonomous(name="Left Red Auton 2+0")
 
 public class LeftRedAuton extends LinearOpMode {
 
@@ -43,13 +43,6 @@ public class LeftRedAuton extends LinearOpMode {
     OpenCVDebug.CenterStagePipeline pipeline;
 
     CRServo roller;
-
-    Pose2d startPose = Constants.startPoseRL;
-    Pose2d purplepixelcenterRL = Constants.purplepixelcenterRL;
-
-    Pose2d purplepixelleftRL = Constants.purplepixelleftRL;
-    Pose2d yellowpixelcenterRL = Constants.yellowpixelcenterRL;
-    Pose2d parkL = Constants.parkL;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -91,36 +84,36 @@ public class LeftRedAuton extends LinearOpMode {
 
         drive = new SampleMecanumDrive(hardwareMap);
 
-        TrajectorySequence purpleCenter = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(purplepixelcenterRL)
+        TrajectorySequence purpleCenter = drive.trajectorySequenceBuilder(Constants.startRL)
+                .lineToLinearHeading(Constants.purpleCenterRL)
                 .addDisplacementMarker(()->{
                     dropdown.setPosition(Constants.dropdownPositionUp);
                     sleep(400);
                 })
-                .lineToLinearHeading(Constants.purplepixelRLoffset)
+                .lineToLinearHeading(Constants.purpleOffsetRL)
                 .build();
 
-        TrajectorySequence purpleLeft = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence purpleLeft = drive.trajectorySequenceBuilder(Constants.startRL)
                 .lineToLinearHeading(Constants.startOffsetRL)
-                .lineToLinearHeading(Constants.purplepixelleftRL)
+                .lineToLinearHeading(Constants.purpleLeftRL)
                 .addDisplacementMarker(()->{
                     dropdown.setPosition(Constants.dropdownPositionUp);
                 })
-                .lineToLinearHeading(Constants.whitepixelRed2offset)
-                .lineToLinearHeading(Constants.purplepixelRLoffset)
+                .lineToLinearHeading(Constants.purpleLeftOffsetRL)
+                .lineToLinearHeading(Constants.purpleOffsetRL)
                 .build();
 
-        TrajectorySequence purpleRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(Constants.purplepixelrightRL)
-                .lineToLinearHeading(Constants.purplepixelrightRLoffset)
+        TrajectorySequence purpleRight = drive.trajectorySequenceBuilder(Constants.startRL)
+                .lineToLinearHeading(Constants.purpleRightOffsetRL)
+                .lineToLinearHeading(Constants.purpleRightRL)
                 .addDisplacementMarker(()->{
                     dropdown.setPosition(Constants.dropdownPositionUp);
                 })
-                .lineToLinearHeading(Constants.purplepixelrightRL)
-                .lineToLinearHeading(Constants.purplepixelRLoffset)
+                .lineToLinearHeading(Constants.purpleRightOffsetRL)
+                .lineToLinearHeading(Constants.purpleOffsetRL)
                 .build();
 
-        TrajectorySequence yellowCenter = drive.trajectorySequenceBuilder(Constants.purplepixelRLoffset)
+        TrajectorySequence yellowCenter = drive.trajectorySequenceBuilder(Constants.purpleOffsetRL)
                 .addTemporalMarker(2.5, () -> {
                     Constants.setLift(Constants.liftTargetLow, 1);
                     blocker.setPosition(Constants.blockerClosedPosition);
@@ -133,7 +126,7 @@ public class LeftRedAuton extends LinearOpMode {
                 .addDisplacementMarker(() -> {
                     Constants.setIntake(0);
                 })
-                .lineToLinearHeading(Constants.yellowFarDropCenterRL)
+                .lineToLinearHeading(Constants.yellowCenterRL)
                 .addDisplacementMarker(()->{
                     blocker.setPosition(Constants.blockerOpenPosition);
                     sleep(300);
@@ -149,12 +142,12 @@ public class LeftRedAuton extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
                     Constants.setLift(0, 1);
                 })
-                .lineToLinearHeading(Constants.yellowFarDropRLOffset)
-                .lineToLinearHeading(Constants.yellowFarDropRLOffset2)
-                .lineToLinearHeading(Constants.whitepixelRed2)
+                .lineToLinearHeading(Constants.yellowOffsetRL)
+                .lineToLinearHeading(Constants.farParkOffsetRL)
+                .lineToLinearHeading(Constants.farParkRL)
                 .build();
 
-        TrajectorySequence yellowLeft = drive.trajectorySequenceBuilder(Constants.purplepixelRLoffset)
+        TrajectorySequence yellowLeft = drive.trajectorySequenceBuilder(Constants.purpleOffsetRL)
                 .addTemporalMarker(2.5, () -> {
                     Constants.setLift(Constants.liftTargetLow, 1);
                     blocker.setPosition(Constants.blockerClosedPosition);
@@ -167,7 +160,7 @@ public class LeftRedAuton extends LinearOpMode {
                 .addDisplacementMarker(() -> {
                     Constants.setIntake(0);
                 })
-                .lineToLinearHeading(Constants.yellowFarDropLeftRL)
+                .lineToLinearHeading(Constants.yellowLeftRL)
                 .addDisplacementMarker(()->{
                     blocker.setPosition(Constants.blockerOpenPosition);
                     sleep(300);
@@ -183,12 +176,12 @@ public class LeftRedAuton extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
                     Constants.setLift(0, 1);
                 })
-                .lineToLinearHeading(Constants.yellowFarDropRLOffset)
-                .lineToLinearHeading(Constants.yellowFarDropRLOffset2)
-                .lineToLinearHeading(Constants.whitepixelRed2)
+                .lineToLinearHeading(Constants.yellowOffsetRL)
+                .lineToLinearHeading(Constants.farParkOffsetRL)
+                .lineToLinearHeading(Constants.farParkRL)
                 .build();
 
-        TrajectorySequence yellowRight = drive.trajectorySequenceBuilder(Constants.purplepixelRLoffset)
+        TrajectorySequence yellowRight = drive.trajectorySequenceBuilder(Constants.purpleOffsetRL)
                 .addTemporalMarker(2.5, () -> {
                     Constants.setLift(Constants.liftTargetLow, 1);
                     blocker.setPosition(Constants.blockerClosedPosition);
@@ -201,7 +194,7 @@ public class LeftRedAuton extends LinearOpMode {
                 .addDisplacementMarker(() -> {
                     Constants.setIntake(0);
                 })
-                .lineToLinearHeading(Constants.yellowFarDropRightRL)
+                .lineToLinearHeading(Constants.yellowRightRL)
                 .addDisplacementMarker(()->{
                     blocker.setPosition(Constants.blockerOpenPosition);
                     sleep(300);
@@ -217,12 +210,16 @@ public class LeftRedAuton extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.8, () -> {
                     Constants.setLift(0, 1);
                 })
-                .lineToLinearHeading(Constants.yellowFarDropRLOffset)
-                .lineToLinearHeading(Constants.yellowFarDropRLOffset2)
-                .lineToLinearHeading(Constants.whitepixelRed2)
+                .lineToLinearHeading(Constants.yellowOffsetRL)
+                .lineToLinearHeading(Constants.farParkOffsetRL)
+                .lineToLinearHeading(Constants.farParkRL)
                 .build();
 
-
+        while (!isStarted()) {
+            telemetry.addData("Analysis", pipeline.getAnalysis());
+            telemetry.addData("Position", pipeline.position);
+            telemetry.update();
+        }
 
         waitForStart();
 
@@ -230,14 +227,14 @@ public class LeftRedAuton extends LinearOpMode {
 
         while (opModeIsActive() && !isStopRequested()) {
 
-            drive.setPoseEstimate(startPose);
+            drive.setPoseEstimate(Constants.startRL);
 
             OpenCVDebug.CenterStagePipeline.Position position = pipeline.position;
             telemetry.addData("Analysis", pipeline.getAnalysis());
             telemetry.addData("Position", pipeline.position);
             telemetry.update();
 
-            dropdown.setPosition(Constants.dropdownPositionStart);
+            dropdown.setPosition(Constants.dropdownPositionAuton);
             sleep(1000);
 
             if (position == OpenCVDebug.CenterStagePipeline.Position.LEFT) {

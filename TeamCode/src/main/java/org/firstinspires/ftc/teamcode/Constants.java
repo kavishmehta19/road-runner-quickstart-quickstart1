@@ -40,123 +40,104 @@ public class Constants { //Declaring Class
     public static double dropdownPositionUp = 0;
     public static double dropdownPositionDown = .658;
 
-    public static double dropdownautonpositionstart = 0.515; // Dropdown at start of autonomous
-    public static double dropdownPositionStart = 0.677;
+    public static double dropdownIntakeStart = 0.515; // Dropdown at start of autonomous
+    public static double dropdownPositionAuton = 0.677;
+    public static double dropdownIncrement = 0.037;
 
+/* BR */
+    public static Pose2d startBR = new Pose2d(60, 43, Math.toRadians(180));
 
-    //BLUE LEFT
-    public static Pose2d startPoseBL = new Pose2d(60, -6, Math.toRadians(180)); // Line to Linear Heading - Goes to position (60,-6) while turning 180 degrees
-    public static Pose2d purplepixelcenterBL = new Pose2d(32, -10, Math.toRadians(180));
-    public static Pose2d purplepixelleftBL = new Pose2d(36, -21, Math.toRadians(180));
-    public static Pose2d purplepixelrightBL = new Pose2d(37,1,Math.toRadians(130));
-    public static Pose2d purplepixelcenterBLoffset = new Pose2d(36, -6, Math.toRadians(90));
-    public static Pose2d purplepixelleftBLoffset = new Pose2d(purplepixelleftBL.getX(),-24,Math.toRadians(180)); // Retrieves the x-coordinate of purplepixelleftBL with y-coordinate of -24, turns 180 degrees
-    public static Pose2d purplepixelrightBLoffset = new Pose2d(40,-6,Math.toRadians(180));
-    public static Pose2d yellowpixelcenterBL = new Pose2d(35, -34.5, Math.toRadians(90));
-    public static Pose2d yellowpixelleftBL = new Pose2d(39,-34,Math.toRadians(90));
-    public static Pose2d yellowpixelrightBL = new Pose2d(28,-33.5,Math.toRadians(90));
+    public static Pose2d purpleLeftOffsetBR = new Pose2d(43, 47, Math.toRadians(-90));
+    public static Pose2d purpleLeftBR = new Pose2d(43, 40, Math.toRadians(-90));
+    public static Pose2d purpleCenterBR = new Pose2d(26, 55, Math.toRadians(0)); //Strafes to (26, 55)
+    public static Pose2d purpleRightBR = new Pose2d(30,66,Math.toRadians(0));
 
-    public static Pose2d cycledepositBL = new Pose2d(36,-35,Math.toRadians(90));
-
-    public static Pose2d whitepixelBlue = new Pose2d(13, -10, Math.toRadians(90));
-    public static Pose2d whitepixelBlue2 = new Pose2d(16, -46, Math.toRadians(90));
-    public static Pose2d whitepixelBlue2Halfway = new Pose2d(13, 10, Math.toRadians(90));
-
-    public static Pose2d whitepixeloffsetBlueLeft = new Pose2d(13, 74.4, Math.toRadians(90));
-
-    public static Pose2d whitepixeloffsetBlueRight = new Pose2d(11.5, 72.5, Math.toRadians(90));
-
-    public static Pose2d startPoseBR = new Pose2d(60, 43, Math.toRadians(180));
-    public static Pose2d purplepixelcenterBR = new Pose2d(26, 55, Math.toRadians(0)); //Strafes to (26, 55)
-
-    public static Pose2d purplepixelleftBRoffset = new Pose2d(43, 40, Math.toRadians(-90));
-    public static Pose2d purplepixelleftBR = new Pose2d(43, 47, Math.toRadians(-90));
-
-    public static Pose2d purplepixelrightBR = new Pose2d(30,66,Math.toRadians(0));
-    public static Pose2d purplepixelBRoffset = new Pose2d(12, 55, Math.toRadians(90));
-    public static Pose2d purplepixelBRoffsetOffset = new Pose2d(10, 55, Math.toRadians(90));
+    public static Pose2d purpleFirstOffsetBR = new Pose2d(10, 55, Math.toRadians(90));
+    public static Pose2d purpleOffsetBR = new Pose2d(12, 55, Math.toRadians(90));
 
     public static Pose2d prepareDropBR = new Pose2d(16,-20,Math.toRadians(90));
 
-    public static Pose2d yellowFarDropCenterBR = new Pose2d(42.5,-35,Math.toRadians(90));
-    public static Pose2d yellowFarDropLeftBR = new Pose2d(49.5,-33,Math.toRadians(90));
-    public static Pose2d yellowFarDropRightBR = new Pose2d(35 ,-35,Math.toRadians(90));
-    public static Pose2d yellowFarDropBROffset = new Pose2d(42,-26,Math.toRadians(90));
-    public static Pose2d yellowFarDropBROffset2 = new Pose2d(16,-26,Math.toRadians(90));
+    public static Pose2d yellowCenterBR = new Pose2d(42.5,-35,Math.toRadians(90));
+    public static Pose2d yellowLeftBR = new Pose2d(49.5,-33,Math.toRadians(90));
+    public static Pose2d yellowRightBR = new Pose2d(35 ,-35,Math.toRadians(90));
+    public static Pose2d yellowResetBR = new Pose2d(42,-26,Math.toRadians(90));
+
+    public static Pose2d farParkOffsetBR = new Pose2d(16,-26,Math.toRadians(90));
+    public static Pose2d farParkBR = new Pose2d(16, -46, Math.toRadians(90));
+/* END BR */
+
+/* BL */
+    public static Pose2d startBL = new Pose2d(60, -6, Math.toRadians(180)); // Line to Linear Heading - Goes to position (60,-6) while turning 180 degrees
+
+    public static Pose2d purpleCenterBL = new Pose2d(32, -10, Math.toRadians(180));
+    public static Pose2d purpleLeftBL = new Pose2d(36, -21, Math.toRadians(180));
+    public static Pose2d purpleRightBL = new Pose2d(37,1,Math.toRadians(130));
+    public static Pose2d purpleCenterOffsetBL = new Pose2d(36, -6, Math.toRadians(90));
+    public static Pose2d purpleLeftOffsetBL = new Pose2d(36,-24,Math.toRadians(180)); // Retrieves the x-coordinate of purplepixelleftBL with y-coordinate of -24, turns 180 degrees
+    public static Pose2d purpleRightOffsetBL = new Pose2d(40,-6,Math.toRadians(180));
+
+    public static Pose2d backdropCenterBL = new Pose2d(35, -34.5, Math.toRadians(90));
+    public static Pose2d backdropLeftBL = new Pose2d(39,-34,Math.toRadians(90));
+    public static Pose2d backdropRightBL = new Pose2d(28,-33.5,Math.toRadians(90));
+
+    public static Pose2d crossOffsetBL = new Pose2d(13, -10, Math.toRadians(90));
+    public static Pose2d whitePickupBL = new Pose2d(13, 74.4, Math.toRadians(90));
+
+    public static Pose2d midParkBL = new Pose2d(36, -30, Math.toRadians(90));
+    public static Pose2d farParkOffsetBL = new Pose2d(13,-30,Math.toRadians(90));
+    public static Pose2d farParkBL = new Pose2d(13,-44,Math.toRadians(90));
+    public static Pose2d closeParkOffsetBL = new Pose2d(50,-30, Math.toRadians(90));
+    public static Pose2d closeParkBL = new Pose2d(50,-44, Math.toRadians(90));
+/* END BL */
+
+/* RR */
+    public static Pose2d startRR = new Pose2d(-60, -1, Math.toRadians(0));
+    public static Pose2d purpleCenterRR = new Pose2d(-32, -1, Math.toRadians(0));
+    public static Pose2d purpleRightRR = new Pose2d(-34, -9, Math.toRadians(0));
+    public static Pose2d purpleLeftOffsetRR = new Pose2d(-40,-7,Math.toRadians(90));
+    public static Pose2d purpleLeftRR = new Pose2d(-43,3,Math.toRadians(90));
+
+    public static Pose2d backdropCenterOffsetRR = new Pose2d(-44, -6, Math.toRadians(90));
+    public static Pose2d purpleCenterOffsetRR = new Pose2d(-44, -1, Math.toRadians(0));
+
+    public static Pose2d purpleRightOffsetRR = new Pose2d(-37,-10,Math.toRadians(0));
+
+    public static Pose2d backdropCenterRR = new Pose2d(-44, -41, Math.toRadians(90));
+    public static Pose2d backdropRightRR = new Pose2d(-48,-40.5,Math.toRadians(90));
+    public static Pose2d backdropLeftRR = new Pose2d(-37,-40.5,Math.toRadians(90));
+
+    public static Pose2d crossOffsetRR = new Pose2d(-18, -10, Math.toRadians(90));
+    public static Pose2d whitePickupRR = new Pose2d(-22, 68.5, Math.toRadians(90));
+
+    public static Pose2d midParkRR = new Pose2d(-36, -33, Math.toRadians(90));
+    public static Pose2d farParkOffsetRR = new Pose2d(-15,-35,Math.toRadians(90));
+    public static Pose2d farParkRR = new Pose2d(-15,-50,Math.toRadians(90));
+    public static Pose2d closeParkOffsetRR = new Pose2d(-57,-35,Math.toRadians(90));
+    public static Pose2d closeParkRR = new Pose2d(-57,-50,Math.toRadians(90));
+/* END RR */
 
 
-
-    public static Pose2d yellowpixelcenterBR = new Pose2d(47, -35, Math.toRadians(90));
-
-    public static Pose2d yellowpixelleftBR = new Pose2d(51,-33,Math.toRadians(90));
-
-    public static Pose2d yellowpixelrightBR = new Pose2d(41,-34,Math.toRadians(90));
-
-
-    //RED RIGHT
-
-    public static Pose2d startPoseRR = new Pose2d(-60, -1, Math.toRadians(0));
-    public static Pose2d purplepixelcenterRR = new Pose2d(-32, -1, Math.toRadians(0));
-    public static Pose2d purplepixelrightRR = new Pose2d(-34, -9, Math.toRadians(0));
-    public static Pose2d purplepixelleftRR = new Pose2d(-43,3,Math.toRadians(90));
-
-
-    public static Pose2d purplepixelcenterRRoffset = new Pose2d(-44, -6, Math.toRadians(90));
-    public static Pose2d purplepixelcenterRRoffset2 = new Pose2d(-44, -1, Math.toRadians(0));
-
-    public static Pose2d purplepixelrightRRoffset = new Pose2d(-37,-10,Math.toRadians(0));
-
-    public static Pose2d purplepixelleftRRoffset = new Pose2d(-40,-7,Math.toRadians(90));
-    public static Pose2d yellowpixelcenterRR = new Pose2d(-44, -41, Math.toRadians(90));
-    public static Pose2d yellowpixelrightRR = new Pose2d(-48,-40.5,Math.toRadians(90));
-
-    public static Pose2d yellowpixelrightRRoffset = new Pose2d(-48,-35.5,Math.toRadians(90));
-    public static Pose2d yellowpixelleftRR = new Pose2d(-37,-40.5,Math.toRadians(90));
-    public static Pose2d parkR = new Pose2d(-36, -33, Math.toRadians(90));
-    public static Pose2d shiftedPark = new Pose2d(-12,-33,Math.toRadians(90));
-    public static Pose2d parkR2 = new Pose2d(-62, -33, Math.toRadians(90));
-    public static Pose2d parkL = new Pose2d(36, -30, Math.toRadians(90));
-
-
-
-    //RED LEFT
-
-    public static Pose2d startPoseRL = new Pose2d(-60, 43, Math.toRadians(0));
-
+/* RL */
+    public static Pose2d startRL = new Pose2d(-60, 43, Math.toRadians(0));
     public static Pose2d startOffsetRL = new Pose2d(-55, 57, Math.toRadians(0));
 
-    public static Pose2d purplepixelcenterRL = new Pose2d(-22, 40, Math.toRadians(-90));
-
-    public static Pose2d purplepixelleftRL = new Pose2d(-32, 39, Math.toRadians(180));
-
-    public static Pose2d purplepixelrightRL = new Pose2d(-30,45,Math.toRadians(-90));
-
-    public static Pose2d purplepixelcenterRLoffset2 = new Pose2d(-12, -6, Math.toRadians(90));
-    public static Pose2d purplepixelRLoffset = new Pose2d(-18, 62, Math.toRadians(90));
-    public static Pose2d purplepixelleftRLoffset = new Pose2d(purplepixelleftRL.getX(),-24,Math.toRadians(180));
-
-    public static Pose2d purplepixelrightRLoffset = new Pose2d(-30,30,Math.toRadians(-90));
-
-    public static Pose2d yellowpixelcenterRL = new Pose2d(-45, -44, Math.toRadians(90));
-
-    public static Pose2d yellowpixelleftRL = new Pose2d(-41.5,-32,Math.toRadians(90));
-
-    public static Pose2d yellowpixelrightRL = new Pose2d(-28,-32,Math.toRadians(90));
+    public static Pose2d purpleCenterRL = new Pose2d(-22, 40, Math.toRadians(-90));
+    public static Pose2d purpleLeftRL = new Pose2d(-32, 39, Math.toRadians(180));
+    public static Pose2d purpleLeftOffsetRL = new Pose2d(-20, 60, Math.toRadians(90));
+    public static Pose2d purpleRightOffsetRL = new Pose2d(-30,45,Math.toRadians(-90));
+    public static Pose2d purpleRightRL = new Pose2d(-30,30,Math.toRadians(-90));
+    public static Pose2d purpleOffsetRL = new Pose2d(-18, 62, Math.toRadians(90));
 
     public static Pose2d prepareDropRL = new Pose2d(-18,-30,Math.toRadians(90));
 
-    public static Pose2d yellowFarDropCenterRL = new Pose2d(-42.5,-44,Math.toRadians(90));
-    public static Pose2d yellowFarDropLeftRL = new Pose2d(-36,-44,Math.toRadians(90));
-    public static Pose2d yellowFarDropRightRL = new Pose2d(-49.5,-44,Math.toRadians(90));
-    public static Pose2d yellowFarDropRLOffset = new Pose2d(-42,-36,Math.toRadians(90));
-    public static Pose2d yellowFarDropRLOffset2 = new Pose2d(-18,-36,Math.toRadians(90));
+    public static Pose2d yellowCenterRL = new Pose2d(-42.5,-44,Math.toRadians(90));
+    public static Pose2d yellowLeftRL = new Pose2d(-36,-44,Math.toRadians(90));
+    public static Pose2d yellowRightRL = new Pose2d(-49.5,-44,Math.toRadians(90));
+    public static Pose2d yellowOffsetRL = new Pose2d(-42,-36,Math.toRadians(90));
 
-    public static Pose2d whitepixelRed = new Pose2d(-18, -10, Math.toRadians(90));
-    public static Pose2d whitepixelRed2 = new Pose2d(-18, -53, Math.toRadians(90));
-    public static Pose2d whitepixelRed2offset = new Pose2d(-20, 60, Math.toRadians(90));
-    public static Pose2d whitePixelRed2Halfway = new Pose2d(-18,0,Math.toRadians(90));
-    public static Pose2d whitepixeloffsetRed = new Pose2d(-22, 68.5, Math.toRadians(90));
-
+    public static Pose2d farParkOffsetRL = new Pose2d(-18,-36,Math.toRadians(90));
+    public static Pose2d farParkRL = new Pose2d(-18, -53, Math.toRadians(90));
+/* END RL */
 
 
     public static int liftTargetAuton = -1500; //Setting position of linear slides - decrease the variable to increase the height
