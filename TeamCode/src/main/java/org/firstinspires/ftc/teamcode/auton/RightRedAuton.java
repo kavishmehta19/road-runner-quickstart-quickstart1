@@ -155,6 +155,11 @@ public class RightRedAuton extends LinearOpMode {
                 .addTemporalMarker(0.2, () -> {
                     Constants.setLift(Constants.liftTargetMid, 1);
                 })
+                .addTemporalMarker(0.4,()->{
+                    tiltL.setPosition(Constants.tiltIntakePositionL);
+                    tiltR.setPosition(Constants.tiltIntakePositionR);
+                    Constants.setLift(0,1);
+                })
                 .lineToLinearHeading(Constants.midParkRR)
                 .lineToLinearHeading(Constants.closeParkOffsetRR)
                 .lineToLinearHeading(Constants.closeParkRR)
@@ -164,6 +169,11 @@ public class RightRedAuton extends LinearOpMode {
                 .addTemporalMarker(0.2, () -> {
                     Constants.setLift(Constants.liftTargetMid, 1);
                 })
+                .addTemporalMarker(0.4,()->{
+                    tiltL.setPosition(Constants.tiltIntakePositionL);
+                    tiltR.setPosition(Constants.tiltIntakePositionR);
+                    Constants.setLift(0,1);
+                })
                 .lineToLinearHeading(Constants.midParkRR)
                 .lineToLinearHeading(Constants.closeParkOffsetRR)
                 .lineToLinearHeading(Constants.closeParkRR)
@@ -172,6 +182,11 @@ public class RightRedAuton extends LinearOpMode {
         TrajectorySequence parkRight = drive.trajectorySequenceBuilder(Constants.backdropRightRR)
                 .addTemporalMarker(0.2, () -> {
                     Constants.setLift(Constants.liftTargetMid, 1);
+                })
+                .addTemporalMarker(0.4,()->{
+                    tiltL.setPosition(Constants.tiltIntakePositionL);
+                    tiltR.setPosition(Constants.tiltIntakePositionR);
+                    Constants.setLift(0,1);
                 })
                 .lineToLinearHeading(Constants.midParkRR)
                 .lineToLinearHeading(Constants.closeParkOffsetRR)

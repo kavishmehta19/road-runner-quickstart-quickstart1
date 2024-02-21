@@ -110,10 +110,10 @@ public class Constants { //Declaring Class
     public static Pose2d whitePickupRR = new Pose2d(-22, 68.5, Math.toRadians(90));
 
     public static Pose2d midParkRR = new Pose2d(-36, -33, Math.toRadians(90));
-    public static Pose2d farParkOffsetRR = new Pose2d(-15,-35,Math.toRadians(90));
-    public static Pose2d farParkRR = new Pose2d(-15,-50,Math.toRadians(90));
-    public static Pose2d closeParkOffsetRR = new Pose2d(-57,-35,Math.toRadians(90));
-    public static Pose2d closeParkRR = new Pose2d(-57,-50,Math.toRadians(90));
+    public static Pose2d farParkOffsetRR = new Pose2d(-15,-33,Math.toRadians(90));
+    public static Pose2d farParkRR = new Pose2d(-15,-45,Math.toRadians(90));
+    public static Pose2d closeParkOffsetRR = new Pose2d(-67,-33,Math.toRadians(90));
+    public static Pose2d closeParkRR = new Pose2d(-67,-45,Math.toRadians(90));
 /* END RR */
 
 
