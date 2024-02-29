@@ -282,7 +282,7 @@ public class LeftBlueAuton2 extends LinearOpMode {
                         dropdown.setPosition(Constants.dropdownPositionDown);
                     })
                     .addTemporalMarker(2.5, ()->{
-                        Constants.setLift(Constants.liftTargetMid, 1);
+                        Constants.setLift(Constants.liftTargetMid - 200, 1);
                         blocker.setPosition(Constants.blockerClosedPosition);
                     })
                     .addTemporalMarker(3.5, ()->{
@@ -300,14 +300,14 @@ public class LeftBlueAuton2 extends LinearOpMode {
                     .resetConstraints()
                     .lineToLinearHeading(Constants.midParkBL)
                     .addTemporalMarker(0.2, ()->{
-                        Constants.setLift(Constants.liftTargetMid - 300,1);
+                        Constants.setLift(Constants.liftTargetMid - 500,1);
                     })
-                    .addTemporalMarker(0.6, ()->{
+                    .addTemporalMarker(0.7, ()->{
                         tiltL.setPosition(Constants.tiltIntakePositionL);
                         tiltR.setPosition(Constants.tiltIntakePositionR);
 
                     })
-                    .addTemporalMarker(0.8, ()->{
+                    .addTemporalMarker(1, ()->{
                         Constants.setLift(0, 1);
                     })
                     .build();

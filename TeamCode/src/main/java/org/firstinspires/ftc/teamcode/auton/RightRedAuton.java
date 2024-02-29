@@ -238,7 +238,7 @@ public class RightRedAuton extends LinearOpMode {
                 sleep(500);
                 drive.followTrajectorySequence(parkRight);
             }
-            sleep(2000);
+//            sleep(2000);
 
             break;
 

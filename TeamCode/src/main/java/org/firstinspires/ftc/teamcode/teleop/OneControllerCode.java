@@ -61,15 +61,6 @@ public class OneControllerCode extends LinearOpMode {
         drive = new SampleMecanumDrive(hardwareMap);
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        double tiltIntakePositionL = 0.92;
-        double tiltIntakePositionR = 0.06;
-
-        double tiltDropPositionL = 0.2;
-        double tiltDropPositionR = 0.76;
-
-        double blockerOpenPosition = 0.5;
-        double blockerClosedPosition = 1;
-
         double airplaneOpenPosition = 1;
         double airplaneClosedPosition = 0;
 
@@ -93,7 +84,7 @@ public class OneControllerCode extends LinearOpMode {
         boolean lastLeftBumper = false;
 
         boolean blockerOpen = true;
-        blocker.setPosition(blockerOpenPosition);
+        blocker.setPosition(Constants.blockerOpenPosition);
 
         waitForStart();
 
@@ -131,9 +122,9 @@ public class OneControllerCode extends LinearOpMode {
             boolean rightBumper = g1.right_bumper;
             if (rightBumper && !lastRightBumper) {
                 if (blockerOpen) {
-                    blocker.setPosition(blockerClosedPosition);
+                    blocker.setPosition(Constants.blockerClosedPosition);
                 } else {
-                    blocker.setPosition(blockerOpenPosition);
+                    blocker.setPosition(Constants.blockerOpenPosition);
                 }
                 blockerOpen = !blockerOpen;
 
@@ -180,7 +171,7 @@ public class OneControllerCode extends LinearOpMode {
             if ((liftHittingTarget && (Math.abs(liftTarget - liftL.getCurrentPosition()) > 20) || triggers) && !g1.right_stick_button) {
                 Constants.setLift(liftTarget, 1);
                 if (depositing) {
-                    blocker.setPosition(blockerClosedPosition);
+                    blocker.setPosition(Constants.blockerClosedPosition);
                     blockerOpen = false;
 
                     if (!timerRunning) {
@@ -188,7 +179,7 @@ public class OneControllerCode extends LinearOpMode {
                         timerRunning = true;
                     }
                 } else {
-                    blocker.setPosition(blockerOpenPosition);
+                    blocker.setPosition(Constants.blockerOpenPosition);
                     blockerOpen = true;
 
                     tiltL.setPosition(Constants.tiltIntakePositionL);

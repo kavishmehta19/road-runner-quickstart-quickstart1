@@ -22,9 +22,9 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name="Left Red Auton 2+0")
+@Autonomous(name="Left Red Auton Sleep 2+0")
 
-public class LeftRedAuton extends LinearOpMode {
+public class LeftRedAutonSleep extends LinearOpMode {
 
     SampleMecanumDrive drive;
 
@@ -244,18 +244,18 @@ public class LeftRedAuton extends LinearOpMode {
 
             if (position == OpenCVDebug.CenterStagePipeline.Position.LEFT) {
                 drive.followTrajectorySequence(purpleLeft);
-//                sleep(6500);
+                sleep(6500);
                 drive.followTrajectorySequence(yellowLeft);
             }
             else if (position == OpenCVDebug.CenterStagePipeline.Position.CENTER) {
                 drive.followTrajectorySequence(purpleCenter);
-//                sleep(6500);
+                sleep(6500);
                 drive.followTrajectorySequence(yellowCenter);
             }
             else {
                 drive.followTrajectorySequence(purpleRight);
                 dropdown.setPosition(Constants.dropdownPositionUp);
-//                sleep(6500);
+                sleep(6500);
                 drive.followTrajectorySequence(yellowRight);
             }
 

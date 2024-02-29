@@ -120,7 +120,7 @@ public class RightBlueAuton extends LinearOpMode {
 
         TrajectorySequence yellowCenter = drive.trajectorySequenceBuilder(Constants.purpleOffsetBR)
                 .addTemporalMarker(2.5, () -> {
-                    Constants.setLift(Constants.liftTargetLow, 1);
+                    Constants.setLift(Constants.liftTargetLow - 150, 1);
                     blocker.setPosition(Constants.blockerClosedPosition);
                 })
                 .addTemporalMarker(3.5, () -> {
@@ -131,10 +131,11 @@ public class RightBlueAuton extends LinearOpMode {
                 .addDisplacementMarker(() -> {
                     Constants.setIntake(0);
                 })
+                .lineToLinearHeading(Constants.yellowResetBR)
                 .lineToLinearHeading(Constants.yellowCenterBR)
                 .addDisplacementMarker(()->{
                     blocker.setPosition(Constants.blockerOpenPosition);
-
+                    sleep(500);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(0.1,()->{
                     Constants.setLift(Constants.liftTargetMid, 1);
@@ -150,12 +151,12 @@ public class RightBlueAuton extends LinearOpMode {
 
                 .lineToLinearHeading(Constants.yellowResetBR)
                 .lineToLinearHeading(Constants.farParkOffsetBR)
-                .lineToLinearHeading(Constants.farParkBR)
+                .lineTo(new Vector2d(Constants.farParkBR.getX(), Constants.farParkBR.getY()))
                 .build();
 
         TrajectorySequence yellowLeft = drive.trajectorySequenceBuilder(Constants.purpleOffsetBR)
                 .addTemporalMarker(2.5, () -> {
-                    Constants.setLift(Constants.liftTargetLow, 1);
+                    Constants.setLift(Constants.liftTargetLow - 150, 1);
                     blocker.setPosition(Constants.blockerClosedPosition);
                 })
                 .addTemporalMarker(3.5, () -> {
@@ -166,9 +167,11 @@ public class RightBlueAuton extends LinearOpMode {
                 .addDisplacementMarker(() -> {
                     Constants.setIntake(0);
                 })
+                .lineToLinearHeading(Constants.yellowResetBR)
                 .lineToLinearHeading(Constants.yellowLeftBR)
                 .addDisplacementMarker(()->{
                     blocker.setPosition(Constants.blockerOpenPosition);
+                    sleep(500);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(0.1,()->{
                     Constants.setLift(Constants.liftTargetMid, 1);
@@ -183,12 +186,12 @@ public class RightBlueAuton extends LinearOpMode {
                 })
                 .lineToLinearHeading(Constants.yellowResetBR)
                 .lineToLinearHeading(Constants.farParkOffsetBR)
-                .lineToLinearHeading(Constants.farParkBR)
+                .lineTo(new Vector2d(Constants.farParkBR.getX(), Constants.farParkBR.getY()))
                 .build();
 
         TrajectorySequence yellowRight = drive.trajectorySequenceBuilder(Constants.purpleOffsetBR)
                 .addTemporalMarker(2.5, () -> {
-                    Constants.setLift(Constants.liftTargetLow, 1);
+                    Constants.setLift(Constants.liftTargetLow - 150, 1);
                     blocker.setPosition(Constants.blockerClosedPosition);
                 })
                 .addTemporalMarker(3.5, () -> {
@@ -199,6 +202,7 @@ public class RightBlueAuton extends LinearOpMode {
                 .addDisplacementMarker(() -> {
                     Constants.setIntake(0);
                 })
+                .lineToLinearHeading(Constants.yellowResetBR)
                 .lineToLinearHeading(Constants.yellowRightBR)
                 .addDisplacementMarker(()->{
                     blocker.setPosition(Constants.blockerOpenPosition);
@@ -217,7 +221,7 @@ public class RightBlueAuton extends LinearOpMode {
                 })
                 .lineToLinearHeading(Constants.yellowResetBR)
                 .lineToLinearHeading(Constants.farParkOffsetBR)
-                .lineToLinearHeading(Constants.farParkBR)
+                .lineTo(new Vector2d(Constants.farParkBR.getX(), Constants.farParkBR.getY()))
                 .build();
 
         while (!isStarted()) {
@@ -260,7 +264,6 @@ public class RightBlueAuton extends LinearOpMode {
                 sleep(300);
                 drive.followTrajectorySequence(yellowRight);
             }
-            sleep(2000);
 
             break;
 
