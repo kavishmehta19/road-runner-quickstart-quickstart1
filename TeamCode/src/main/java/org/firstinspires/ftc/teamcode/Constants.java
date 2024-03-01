@@ -18,6 +18,7 @@ public class Constants { //Declaring Class
 
     public static DcMotor intakeL; //Intake Left
 
+    public static Servo blockerInner;
     public static Servo blocker;
     public static Servo tiltL; // Outtake Left Side
     public static Servo tiltR; // Outtake Right Side
@@ -25,8 +26,7 @@ public class Constants { //Declaring Class
 
     public static ColorSensor colorSensor;
 
-    public static DigitalChannel beamInner;
-    public static DigitalChannel beamOuter;
+    public static DigitalChannel beamBreak;
 
     public static Servo airplane;
     public static Servo dropdown; // Dropdown intake
@@ -34,12 +34,15 @@ public class Constants { //Declaring Class
     public static double tiltDropPositionL = 0.867;//intake tilt position servo Left
     public static double tiltDropPositionR = 0.663;//intake tilt position servo Right
 
-    public static double tiltIntakePositionL = 0.54;//drop tilt position servo Left
-    public static double tiltIntakePositionR = 0.96;//drop tilt position servo Right
+    public static double tiltIntakePositionL = 0.52;//drop tilt position servo Left
+    public static double tiltIntakePositionR = 0.98;//drop tilt position servo Right
 
     public static double blockerClosedPosition = 0.5;//hello
     public static double blockerOpenPosition = 0.62;
     public static double blockerWidePosition = 0.75;
+
+    public static double blockerInnerClosedPosition = 0.1;
+    public static double blockerInnerOpenPosition = 0.25;
 
     public static double dropdownPositionUp = 0;
     public static double dropdownPositionDown = .658;
@@ -203,6 +206,7 @@ public class Constants { //Declaring Class
         intakeR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         blocker = hardwareMap.servo.get("blocker");
+        blockerInner = hardwareMap.servo.get("blocker2");
         tiltL = hardwareMap.servo.get("tiltL");
         tiltR = hardwareMap.servo.get("tiltR");
         airplane = hardwareMap.servo.get("airplane");
@@ -212,11 +216,8 @@ public class Constants { //Declaring Class
 
         colorSensor = hardwareMap.colorSensor.get("color");
 
-        beamInner = hardwareMap.get(DigitalChannel.class, "beam1");
-        beamInner.setMode(DigitalChannel.Mode.INPUT);
-
-        beamOuter = hardwareMap.get(DigitalChannel.class, "beam2");
-        beamOuter.setMode(DigitalChannel.Mode.INPUT);
+        beamBreak = hardwareMap.get(DigitalChannel.class, "beam1");
+        beamBreak.setMode(DigitalChannel.Mode.INPUT);
     }
 
 }

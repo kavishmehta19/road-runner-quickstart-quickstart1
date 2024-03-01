@@ -22,8 +22,8 @@ public class SecondAutomation extends LinearOpMode {
 
     DcMotor intakeL = null;
 
-
     Servo blocker = null;
+    Servo blockerInner = null;
 
     Servo tiltL = null;
     Servo tiltR = null;
@@ -33,8 +33,7 @@ public class SecondAutomation extends LinearOpMode {
     Servo airplane = null;
     Servo dropdown = null;
 
-    DigitalChannel beamInner = null;
-    DigitalChannel beamOuter = null;
+    DigitalChannel beamBreak = null;
 
     Gamepad g1 = gamepad1;
     Gamepad g2 = gamepad2;
@@ -56,14 +55,14 @@ public class SecondAutomation extends LinearOpMode {
         intakeL = Constants.intakeL;
 
         blocker = Constants.blocker;
+        blockerInner = Constants.blockerInner;
         roller = Constants.roller;
         tiltL = Constants.tiltL;
         tiltR = Constants.tiltR;
         airplane = Constants.airplane;
         dropdown = Constants.dropdown;
 
-        beamInner = Constants.beamInner;
-        beamOuter = Constants.beamOuter;
+        beamBreak = Constants.beamBreak;
 
         drive = new SampleMecanumDrive(hardwareMap);
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -95,8 +94,9 @@ public class SecondAutomation extends LinearOpMode {
         boolean lastRightBumper = false;
         boolean lastLeftBumper = false;
 
-        boolean blockerOpen = true;
+        int blockerState = 0;
         blocker.setPosition(Constants.blockerOpenPosition);
+        blockerInner.setPosition(Constants.blockerInnerOpenPosition);
 
         waitForStart();
 
@@ -133,13 +133,21 @@ public class SecondAutomation extends LinearOpMode {
 
             boolean rightBumper = g2.right_bumper;
             if (rightBumper && !lastRightBumper) {
-                if (blockerOpen) {
-                    blocker.setPosition(Constants.blockerClosedPosition);
-                } else {
-                    blocker.setPosition(Constants.blockerOpenPosition);
+                switch(blockerState){
+                    case 0:
+                        blocker.setPosition(Constants.blockerClosedPosition);
+                        blockerInner.setPosition(Constants.blockerInnerClosedPosition);
+                        break;
+                    case 1:
+                        blocker.setPosition(Constants.blockerOpenPosition);
+                        blockerInner.setPosition(Constants.blockerInnerClosedPosition);
+                        break;
+                    case 2:
+                        blocker.setPosition(Constants.blockerOpenPosition);
+                        blockerInner.setPosition(Constants.blockerInnerOpenPosition);
+                        break;
                 }
-                blockerOpen = !blockerOpen;
-
+                blockerState += (blockerState < 2) ? 1 : -2;
             }
             lastRightBumper = rightBumper;
 
@@ -188,7 +196,8 @@ public class SecondAutomation extends LinearOpMode {
                 Constants.setLift(liftTarget, 1);
                 if (depositing){
                     blocker.setPosition(Constants.blockerClosedPosition);
-                    blockerOpen = false;
+                    blockerInner.setPosition(Constants.blockerInnerClosedPosition);
+                    blockerState = 1;
 
                     if (!timerRunning) {
                         timer = System.currentTimeMillis();
@@ -197,7 +206,8 @@ public class SecondAutomation extends LinearOpMode {
                 }
                 else {
                     blocker.setPosition(Constants.blockerOpenPosition);
-                    blockerOpen = true;
+                    blockerInner.setPosition(Constants.blockerInnerOpenPosition);
+                    blockerState = 0;
 
                     tiltPositionL = (Constants.tiltIntakePositionL);
                     tiltPositionR = (Constants.tiltIntakePositionR);
@@ -269,8 +279,7 @@ public class SecondAutomation extends LinearOpMode {
             telemetry.addData("tiltL", tiltL.getPosition());
             telemetry.addData("dropdown", dropdown.getPosition());
             telemetry.addData("airplane", airplane.getPosition());
-            telemetry.addData("beambreak inner", beamInner.getState());
-            telemetry.addData("beambreak outer", beamOuter.getState());
+            telemetry.addData("beambreak", beamBreak.getState());
             telemetry.update();
 
         }

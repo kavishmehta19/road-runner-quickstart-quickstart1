@@ -52,8 +52,7 @@ public class LeftBlueAutonBeam extends LinearOpMode {
     Servo airplane;
     Servo dropdown;
 
-    DigitalChannel beamInner;
-    DigitalChannel beamOuter;
+    DigitalChannel beamBreak;
 
     OpenCvCamera phoneCam;
     WebcamName webcamName;
@@ -86,8 +85,7 @@ public class LeftBlueAutonBeam extends LinearOpMode {
         intakeL = Constants.intakeL;
         intakeR = Constants.intakeR;
 
-        beamInner = Constants.beamInner;
-        beamOuter = Constants.beamOuter;
+        beamBreak = Constants.beamBreak;
 
         blocker.setPosition(Constants.blockerClosedPosition);
         dropdown.setPosition(Constants.dropdownPositionUp);
@@ -348,10 +346,10 @@ public class LeftBlueAutonBeam extends LinearOpMode {
 
         long startTime = System.currentTimeMillis();
         while (System.currentTimeMillis() - startTime < millis) {
-            if (!beamOuter.getState() && !beamInner.getState() && !timerStarted) {
+            if (!beamBreak.getState() && !timerStarted) {
                 timerStarted = true;
                 timer = System.currentTimeMillis();
-            } else if (!beamOuter.getState() && !beamInner.getState()) {
+            } else if (!beamBreak.getState()) {
                 if (System.currentTimeMillis() - timer > 500) {
                     return 1;
                 }
