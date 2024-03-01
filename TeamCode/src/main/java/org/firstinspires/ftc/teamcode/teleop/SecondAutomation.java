@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -32,6 +33,9 @@ public class SecondAutomation extends LinearOpMode {
     Servo airplane = null;
     Servo dropdown = null;
 
+    DigitalChannel beamInner = null;
+    DigitalChannel beamOuter = null;
+
     Gamepad g1 = gamepad1;
     Gamepad g2 = gamepad2;
 
@@ -57,6 +61,9 @@ public class SecondAutomation extends LinearOpMode {
         tiltR = Constants.tiltR;
         airplane = Constants.airplane;
         dropdown = Constants.dropdown;
+
+        beamInner = Constants.beamInner;
+        beamOuter = Constants.beamOuter;
 
         drive = new SampleMecanumDrive(hardwareMap);
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -262,6 +269,8 @@ public class SecondAutomation extends LinearOpMode {
             telemetry.addData("tiltL", tiltL.getPosition());
             telemetry.addData("dropdown", dropdown.getPosition());
             telemetry.addData("airplane", airplane.getPosition());
+            telemetry.addData("beambreak inner", beamInner.getState());
+            telemetry.addData("beambreak outer", beamOuter.getState());
             telemetry.update();
 
         }

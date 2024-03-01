@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auton;
+package org.firstinspires.ftc.teamcode.unused;
 
 import androidx.annotation.NonNull;
 
@@ -30,7 +30,8 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name="Left Blue Auton 2+2")
+@Disabled
+@Autonomous(name="Left Blue Auton No Beam 2+2")
 
 public class LeftBlueAuton2 extends LinearOpMode {
 

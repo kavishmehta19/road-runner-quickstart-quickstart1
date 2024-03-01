@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d; //Importing Libraries
 import com.qualcomm.robotcore.hardware.CRServo; //Importing Libraries
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor; //Importing Libraries
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap; //Importing Libraries
 import com.qualcomm.robotcore.hardware.Servo; //Importing Libraries
 
@@ -23,6 +24,9 @@ public class Constants { //Declaring Class
     public static CRServo roller; //Continuously Rotating Roller
 
     public static ColorSensor colorSensor;
+
+    public static DigitalChannel beamInner;
+    public static DigitalChannel beamOuter;
 
     public static Servo airplane;
     public static Servo dropdown; // Dropdown intake
@@ -207,6 +211,12 @@ public class Constants { //Declaring Class
         roller = hardwareMap.crservo.get("roller");
 
         colorSensor = hardwareMap.colorSensor.get("color");
+
+        beamInner = hardwareMap.get(DigitalChannel.class, "beam1");
+        beamInner.setMode(DigitalChannel.Mode.INPUT);
+
+        beamOuter = hardwareMap.get(DigitalChannel.class, "beam2");
+        beamOuter.setMode(DigitalChannel.Mode.INPUT);
     }
 
 }
