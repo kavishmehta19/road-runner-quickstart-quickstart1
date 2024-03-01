@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
-@TeleOp(name="Regionals")
+@TeleOp(name = "Regionals")
 public class SecondAutomation extends LinearOpMode {
 
     SampleMecanumDrive drive;
@@ -37,6 +37,8 @@ public class SecondAutomation extends LinearOpMode {
 
     Gamepad g1 = gamepad1;
     Gamepad g2 = gamepad2;
+
+    int blockerState = 0;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -85,6 +87,7 @@ public class SecondAutomation extends LinearOpMode {
         boolean liftHittingTarget = false;
 
         boolean depositing = false;
+        boolean firstDeposit = true;
 
         boolean tiltDropping = false;
         tiltL.setPosition(Constants.tiltIntakePositionL);
@@ -94,7 +97,7 @@ public class SecondAutomation extends LinearOpMode {
         boolean lastRightBumper = false;
         boolean lastLeftBumper = false;
 
-        int blockerState = 0;
+        blockerState = 0;
         blocker.setPosition(Constants.blockerOpenPosition);
         blockerInner.setPosition(Constants.blockerInnerOpenPosition);
 
@@ -133,21 +136,7 @@ public class SecondAutomation extends LinearOpMode {
 
             boolean rightBumper = g2.right_bumper;
             if (rightBumper && !lastRightBumper) {
-                switch(blockerState){
-                    case 0:
-                        blocker.setPosition(Constants.blockerClosedPosition);
-                        blockerInner.setPosition(Constants.blockerInnerClosedPosition);
-                        break;
-                    case 1:
-                        blocker.setPosition(Constants.blockerOpenPosition);
-                        blockerInner.setPosition(Constants.blockerInnerClosedPosition);
-                        break;
-                    case 2:
-                        blocker.setPosition(Constants.blockerOpenPosition);
-                        blockerInner.setPosition(Constants.blockerInnerOpenPosition);
-                        break;
-                }
-                blockerState += (blockerState < 2) ? 1 : -2;
+                switchBlocker();
             }
             lastRightBumper = rightBumper;
 
@@ -169,24 +158,20 @@ public class SecondAutomation extends LinearOpMode {
                 liftTarget = Constants.liftTargetLow;
                 liftHittingTarget = true;
                 depositing = true;
-            }
-            else if (g2.circle) {
+            } else if (g2.circle) {
                 liftTarget = Constants.liftTargetMid;
                 liftHittingTarget = true;
                 depositing = true;
-            }
-            else if (g2.triangle) {
+            } else if (g2.triangle) {
                 liftTarget = Constants.liftTargetHigh;
                 liftHittingTarget = true;
                 depositing = true;
-            }
-            else if (triggers){
+            } else if (triggers) {
                 if (!liftHittingTarget)
                     liftTarget = -(liftR.getCurrentPosition());
                 liftHittingTarget = true;
                 depositing = false;
-            }
-            else if (g2.cross) {
+            } else if (g2.cross) {
                 liftTarget = 0;
                 liftHittingTarget = true;
                 depositing = false;
@@ -194,23 +179,25 @@ public class SecondAutomation extends LinearOpMode {
 
             if ((liftHittingTarget && (Math.abs(liftTarget - liftL.getCurrentPosition()) > 20) || triggers) && !g2.right_stick_button) {
                 Constants.setLift(liftTarget, 1);
-                if (depositing){
-                    blocker.setPosition(Constants.blockerClosedPosition);
-                    blockerInner.setPosition(Constants.blockerInnerClosedPosition);
-                    blockerState = 1;
+                if (depositing) {
+                    if (firstDeposit) {
+                        switchBlocker();
+                        firstDeposit = false;
+                    }
 
                     if (!timerRunning) {
                         timer = System.currentTimeMillis();
                         timerRunning = true;
                     }
-                }
-                else {
+                } else {
                     blocker.setPosition(Constants.blockerOpenPosition);
                     blockerInner.setPosition(Constants.blockerInnerOpenPosition);
                     blockerState = 0;
 
                     tiltPositionL = (Constants.tiltIntakePositionL);
                     tiltPositionR = (Constants.tiltIntakePositionR);
+
+                    firstDeposit = true;
                 }
             } else {
                 liftL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -220,32 +207,32 @@ public class SecondAutomation extends LinearOpMode {
                 liftR.setPower(-g2.left_stick_y);
 
                 liftHittingTarget = false;
+                firstDeposit = true;
             }
 
-            if (timerRunning && System.currentTimeMillis() - timer > 300){
+            if (timerRunning && System.currentTimeMillis() - timer > 300) {
                 tiltPositionL = (Constants.tiltDropPositionL);
                 tiltPositionR = (Constants.tiltDropPositionR);
                 timerRunning = false;
             }
 
-            if(g1.a){
+            if (g1.a) {
                 airplane.setPosition(airplaneOpenPosition);
-            }
-            else{
+            } else {
                 airplane.setPosition(airplaneClosedPosition);
             }
 
-            if (g2.dpad_up){
+            if (g2.dpad_up) {
                 dropdownPosition = Constants.dropdownPositionUp;
             }
-            if (g2.dpad_down){
+            if (g2.dpad_down) {
                 dropdownPosition = Constants.dropdownPositionDown;
             }
 
-            if (g2.dpad_right){
+            if (g2.dpad_right) {
                 dropdownPosition -= 0.001;
             }
-            if (g2.dpad_left){
+            if (g2.dpad_left) {
                 dropdownPosition += 0.001;
             }
 
@@ -254,15 +241,19 @@ public class SecondAutomation extends LinearOpMode {
             tiltPositionL -= 0.001 * g2.right_stick_y;
             tiltPositionR += 0.001 * g2.right_stick_y * tiltMultiplier;
 
-            if (tiltPositionL > Constants.tiltDropPositionL) tiltPositionL = Constants.tiltDropPositionL;
-            if (tiltPositionL < Constants.tiltIntakePositionL) tiltPositionL = Constants.tiltIntakePositionL;
-            if (tiltPositionR > Constants.tiltIntakePositionR) tiltPositionR = Constants.tiltIntakePositionR;
-            if (tiltPositionR < Constants.tiltDropPositionR) tiltPositionR = Constants.tiltDropPositionR;
+            if (tiltPositionL > Constants.tiltMaxPositionL)
+                tiltPositionL = Constants.tiltMaxPositionL;
+            if (tiltPositionL < Constants.tiltIntakePositionL)
+                tiltPositionL = Constants.tiltIntakePositionL;
+            if (tiltPositionR > Constants.tiltIntakePositionR)
+                tiltPositionR = Constants.tiltIntakePositionR;
+            if (tiltPositionR < Constants.tiltMaxPositionR)
+                tiltPositionR = Constants.tiltMaxPositionR;
 
             tiltL.setPosition(tiltPositionL);
             tiltR.setPosition(tiltPositionR);
 
-            if (g2.touchpad){
+            if (g2.touchpad) {
                 liftL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 liftL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
@@ -280,10 +271,30 @@ public class SecondAutomation extends LinearOpMode {
             telemetry.addData("dropdown", dropdown.getPosition());
             telemetry.addData("airplane", airplane.getPosition());
             telemetry.addData("beambreak", beamBreak.getState());
+            telemetry.addData("blocker state", blockerState);
             telemetry.update();
 
         }
 
     }
+
+    public void switchBlocker() {
+        switch (blockerState) {
+            case 0:
+                blocker.setPosition(Constants.blockerClosedPosition);
+                blockerInner.setPosition(Constants.blockerInnerClosedPosition);
+                break;
+            case 1:
+                blocker.setPosition(Constants.blockerOpenPosition);
+                blockerInner.setPosition(Constants.blockerInnerClosedPosition);
+                break;
+            case 2:
+                blocker.setPosition(Constants.blockerOpenPosition);
+                blockerInner.setPosition(Constants.blockerInnerOpenPosition);
+                break;
+        }
+        blockerState += (blockerState < 2) ? 1 : -2;
+    }
+
 
 }

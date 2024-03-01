@@ -10,7 +10,6 @@ import com.qualcomm.robotcore.hardware.Servo; //Importing Libraries
 
 public class Constants { //Declaring Class
 
-
     public static DcMotor liftL; // Right Lift
     public static DcMotor liftR; // Left Lift
 
@@ -33,6 +32,9 @@ public class Constants { //Declaring Class
 
     public static double tiltDropPositionL = 0.867;//intake tilt position servo Left
     public static double tiltDropPositionR = 0.663;//intake tilt position servo Right
+    public static double tiltMaxPositionL = 0.96;
+    public static double tiltMaxPositionR = 0.57;
+
 
     public static double tiltIntakePositionL = 0.52;//drop tilt position servo Left
     public static double tiltIntakePositionR = 0.98;//drop tilt position servo Right
