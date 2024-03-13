@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.teleop;
+package org.firstinspires.ftc.teamcode.states;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -12,8 +12,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
-@TeleOp(name = "Regionals")
-public class SecondAutomation extends LinearOpMode {
+@TeleOp(name = "States")
+public class States extends LinearOpMode {
 
     SampleMecanumDrive drive;
     DcMotor liftL = null;
