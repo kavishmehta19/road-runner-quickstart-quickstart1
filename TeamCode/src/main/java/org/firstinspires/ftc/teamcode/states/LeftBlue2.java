@@ -29,7 +29,7 @@ public class LeftBlue2 extends LinearOpMode {
     //DECLARING VARIABLES
     SampleMecanumDrive drive; //Driving Code
 
-    DcMotor liftL;
+    DcMotor liftL;//urmum
     DcMotor liftR;
 
     DcMotor intakeL;
