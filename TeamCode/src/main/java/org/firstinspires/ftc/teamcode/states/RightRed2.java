@@ -265,7 +265,7 @@ public class RightRed2 extends LinearOpMode {
                         Constants.setLift(0, 1);
                     })
                     .addTemporalMarker(1.5,()->{
-                        dropdown.setPosition(Constants.dropdownIntakeStart + (4 * 0.025));
+                        dropdown.setPosition(Constants.dropdownIntakeStart);
                         Constants.setIntake(-1);
                         blocker.setPosition(Constants.blockerWidePosition);
                     })
@@ -290,7 +290,7 @@ public class RightRed2 extends LinearOpMode {
                         Constants.setLift(Constants.liftTargetAuton2, 1);
                         blocker.setPosition(Constants.blockerClosedPosition);
                     })
-                    .addTemporalMarker(3.5, () -> {
+                    .addTemporalMarker(3.0, () -> {
                         tiltL.setPosition(Constants.tiltDropPositionL);
                         tiltR.setPosition(Constants.tiltDropPositionR);
                     })

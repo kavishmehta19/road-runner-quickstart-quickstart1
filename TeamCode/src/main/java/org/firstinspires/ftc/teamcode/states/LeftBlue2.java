@@ -274,7 +274,7 @@ public class LeftBlue2 extends LinearOpMode {
                         Constants.setLift(0, 1);
                     })
                     .addTemporalMarker(1.5,()->{
-                        dropdown.setPosition(Constants.dropdownIntakeStart + (4 * 0.025));
+                        dropdown.setPosition(Constants.dropdownIntakeStart);
                         Constants.setIntake(-1);
                         blocker.setPosition(Constants.blockerWidePosition);
                     })
@@ -284,21 +284,16 @@ public class LeftBlue2 extends LinearOpMode {
                     })
                     .build();
             TrajectorySequence intakeOffset = drive.trajectorySequenceBuilder(Constants.whitePickupBL)
-                    .addTemporalMarker(0.4,()->{
-                        dropdown.setPosition(Constants.dropdownPositionDown);
-                    })
                     .lineToLinearHeading(Constants.whitePickupOffsetBL)
                     .build();
 
             TrajectorySequence drop = drive.trajectorySequenceBuilder(Constants.whitePickupOffsetBL)
-                    .addTemporalMarker(0.4,()->{
-                        dropdown.setPosition(Constants.dropdownPositionDown);
-                    })
+
                     .addTemporalMarker(2.5, ()->{
-                        Constants.setLift(Constants.liftTargetAuton2, 1);
+                        Constants.setLift(Constants.liftTargetMid, 1);
                         blocker.setPosition(Constants.blockerClosedPosition);
                     })
-                    .addTemporalMarker(3.5, ()->{
+                    .addTemporalMarker(3.0, ()->{
                         tiltL.setPosition(Constants.tiltDropPositionL);
                         tiltR.setPosition(Constants.tiltDropPositionR);
                     })
@@ -341,7 +336,8 @@ public class LeftBlue2 extends LinearOpMode {
                 }
             }
             drive.followTrajectorySequence(intakeOffset);
-            if (sleepCheck(300) > 0) {
+            dropdown.setPosition(Constants.dropdownPositionDown);
+            if (sleepCheck(500) > 0) {
                 Constants.setIntake(-1);
                 blocker.setPosition(Constants.blockerClosedPosition);
             }

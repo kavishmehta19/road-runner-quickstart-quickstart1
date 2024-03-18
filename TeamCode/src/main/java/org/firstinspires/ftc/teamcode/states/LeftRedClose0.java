@@ -142,19 +142,18 @@ public class LeftRedClose0 extends LinearOpMode {
                 })
                 .lineToLinearHeading(Constants.yellowOffsetRL)
                 .lineToLinearHeading(Constants.yellowCenterRL)
-                .addDisplacementMarker(()->{
-                    blocker.setPosition(Constants.blockerOpenPosition);
-                    sleep(300);
-                })
-                .UNSTABLE_addTemporalMarkerOffset(0.1,()->{
+                .build();
+
+        TrajectorySequence parkCenter = drive.trajectorySequenceBuilder(Constants.yellowCenterRL)
+                .addTemporalMarker(0.1,()->{
                     Constants.setLift(Constants.liftTargetAuton2, 1);
 
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {
+                .addTemporalMarker(0.3, () -> {
                     tiltL.setPosition(Constants.tiltIntakePositionL);
                     tiltR.setPosition(Constants.tiltIntakePositionR);
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.9, () -> {
+                .addTemporalMarker(0.9, () -> {
                     Constants.setLift(0, 1);
                 })
                 .lineToLinearHeading(Constants.yellowOffsetRL)
@@ -177,19 +176,18 @@ public class LeftRedClose0 extends LinearOpMode {
                 })
                 .lineToLinearHeading(Constants.yellowOffsetRL)
                 .lineToLinearHeading(Constants.yellowLeftRL)
-                .addDisplacementMarker(()->{
-                    blocker.setPosition(Constants.blockerOpenPosition);
-                    sleep(300);
-                })
-                .UNSTABLE_addTemporalMarkerOffset(0.1,()->{
+                .build();
+
+        TrajectorySequence parkLeft = drive.trajectorySequenceBuilder(Constants.yellowLeftRL)
+                .addTemporalMarker(0.1,()->{
                     Constants.setLift(Constants.liftTargetAuton2, 1);
 
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {
+                .addTemporalMarker(0.3, () -> {
                     tiltL.setPosition(Constants.tiltIntakePositionL);
                     tiltR.setPosition(Constants.tiltIntakePositionR);
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.9, () -> {
+                .addTemporalMarker(0.9, () -> {
                     Constants.setLift(0, 1);
                 })
                 .lineToLinearHeading(Constants.yellowOffsetRL)
@@ -212,19 +210,18 @@ public class LeftRedClose0 extends LinearOpMode {
                 })
                 .lineToLinearHeading(Constants.yellowOffsetRL)
                 .lineToLinearHeading(Constants.yellowRightRL)
-                .addDisplacementMarker(()->{
-                    blocker.setPosition(Constants.blockerOpenPosition);
-                    sleep(300);
-                })
-                .UNSTABLE_addTemporalMarkerOffset(0.1,()->{
+                .build();
+
+        TrajectorySequence parkRight = drive.trajectorySequenceBuilder(Constants.yellowRightRL)
+                .addTemporalMarker(0.1,()->{
                     Constants.setLift(Constants.liftTargetAuton2, 1);
 
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {
+                .addTemporalMarker(0.3, () -> {
                     tiltL.setPosition(Constants.tiltIntakePositionL);
                     tiltR.setPosition(Constants.tiltIntakePositionR);
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.9, () -> {
+                .addTemporalMarker(0.9, () -> {
                     Constants.setLift(0, 1);
                 })
                 .lineToLinearHeading(Constants.yellowOffsetRL)
@@ -257,14 +254,23 @@ public class LeftRedClose0 extends LinearOpMode {
             if (position == OpenCVDebug.CenterStagePipeline.Position.LEFT) {
                 drive.followTrajectorySequence(purpleLeft);
                 drive.followTrajectorySequence(yellowLeft);
+                blocker.setPosition(Constants.blockerOpenPosition);
+                sleep(600);
+                drive.followTrajectorySequence(parkLeft);
             }
             else if (position == OpenCVDebug.CenterStagePipeline.Position.CENTER) {
                 drive.followTrajectorySequence(purpleCenter);
                 drive.followTrajectorySequence(yellowCenter);
+                blocker.setPosition(Constants.blockerOpenPosition);
+                sleep(600);
+                drive.followTrajectorySequence(parkCenter);
             }
             else {
                 drive.followTrajectorySequence(purpleRight);
                 drive.followTrajectorySequence(yellowRight);
+                blocker.setPosition(Constants.blockerOpenPosition);
+                sleep(600);
+                drive.followTrajectorySequence(parkRight);
             }
 
             break;

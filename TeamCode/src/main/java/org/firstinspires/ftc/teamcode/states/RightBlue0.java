@@ -147,18 +147,17 @@ public class RightBlue0 extends LinearOpMode {
                 })
                 .lineToLinearHeading(Constants.yellowResetBR)
                 .lineToLinearHeading(Constants.yellowCenterBR)
-                .addDisplacementMarker(()->{
-                    blocker.setPosition(Constants.blockerOpenPosition);
-                    sleep(300);
-                })
-                .UNSTABLE_addTemporalMarkerOffset(0.1,()->{
+                .build();
+
+        TrajectorySequence parkCenter = drive.trajectorySequenceBuilder(Constants.yellowCenterBR)
+                .addTemporalMarker(0.3,()->{
                     Constants.setLift(Constants.liftTargetAuton2, 1);
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {
+                .addTemporalMarker(0.6, () -> {
                     tiltL.setPosition(Constants.tiltIntakePositionL);
                     tiltR.setPosition(Constants.tiltIntakePositionR);
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.9, () -> {
+                .addTemporalMarker(0.9, () -> {
                     Constants.setLift(0, 1);
                 })
                 .lineToLinearHeading(Constants.yellowResetBR)
@@ -182,18 +181,17 @@ public class RightBlue0 extends LinearOpMode {
                 })
                 .lineToLinearHeading(Constants.yellowResetBR)
                 .lineToLinearHeading(Constants.yellowLeftBR)
-                .addDisplacementMarker(()->{
-                    blocker.setPosition(Constants.blockerOpenPosition);
-                    sleep(300);
-                })
-                .UNSTABLE_addTemporalMarkerOffset(0.1,()->{
+                .build();
+
+        TrajectorySequence parkLeft = drive.trajectorySequenceBuilder(Constants.yellowLeftBR)
+                .addTemporalMarker(0.1,()->{
                     Constants.setLift(Constants.liftTargetAuton2, 1);
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {
+                .addTemporalMarker(0.3, () -> {
                     tiltL.setPosition(Constants.tiltIntakePositionL);
                     tiltR.setPosition(Constants.tiltIntakePositionR);
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.9, () -> {
+                .addTemporalMarker(0.9, () -> {
                     Constants.setLift(0, 1);
                 })
                 .lineToLinearHeading(Constants.yellowResetBR)
@@ -217,18 +215,17 @@ public class RightBlue0 extends LinearOpMode {
                 })
                 .lineToLinearHeading(Constants.yellowResetBR)
                 .lineToLinearHeading(Constants.yellowRightBR)
-                .addDisplacementMarker(()->{
-                    blocker.setPosition(Constants.blockerOpenPosition);
-                    sleep(300);
-                })
-                .UNSTABLE_addTemporalMarkerOffset(0.1,()->{
+                .build();
+
+        TrajectorySequence parkRight = drive.trajectorySequenceBuilder(Constants.yellowRightBR)
+                .addTemporalMarker(0.1,()->{
                     Constants.setLift(Constants.liftTargetMid, 1);
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {
+                .addTemporalMarker(0.3, () -> {
                     tiltL.setPosition(Constants.tiltIntakePositionL);
                     tiltR.setPosition(Constants.tiltIntakePositionR);
                 })
-                .UNSTABLE_addTemporalMarkerOffset(0.9, () -> {
+                .addTemporalMarker(0.9, () -> {
                     Constants.setLift(0, 1);
                 })
                 .lineToLinearHeading(Constants.yellowResetBR)
@@ -263,6 +260,9 @@ public class RightBlue0 extends LinearOpMode {
 //                drive.followTrajectorySequence(intake);
 //                sleep(500);
                 drive.followTrajectorySequence(yellowLeft);
+                blocker.setPosition(Constants.blockerOpenPosition);
+                sleep(600);
+                drive.followTrajectorySequence(parkLeft);
 
 
             }
@@ -271,6 +271,9 @@ public class RightBlue0 extends LinearOpMode {
 //                drive.followTrajectorySequence(intake);
 //                sleep(500);
                 drive.followTrajectorySequence(yellowCenter);
+                blocker.setPosition(Constants.blockerOpenPosition);
+                sleep(600);
+                drive.followTrajectorySequence(parkCenter);
 
 
             }
@@ -279,6 +282,9 @@ public class RightBlue0 extends LinearOpMode {
 //                drive.followTrajectorySequence(intake);
 //                sleep(500);
                 drive.followTrajectorySequence(yellowRight);
+                blocker.setPosition(Constants.blockerOpenPosition);
+                sleep(600);
+                drive.followTrajectorySequence(parkRight);
             }
 
             break;
