@@ -158,7 +158,7 @@ public class Constants { //Declaring Class
     public static Pose2d purpleRightRL = new Pose2d( -34,-32, Math.toRadians(0));
     public static Pose2d purpleOffsetRL = new Pose2d( -57, -13,Math.toRadians(180));
 
-    public static Pose2d farIntakeRL = new Pose2d(-57,-13,Math.toRadians(180));
+    public static Pose2d farIntakeRL = new Pose2d(-60,-13,Math.toRadians(180));
 
     public static Pose2d prepareDropRL = new Pose2d( 35, -13,Math.toRadians(180));
 
